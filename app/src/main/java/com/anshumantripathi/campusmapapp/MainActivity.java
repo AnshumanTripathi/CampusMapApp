@@ -1,5 +1,6 @@
 package com.anshumantripathi.campusmapapp;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -37,6 +38,10 @@ public class MainActivity extends AppCompatActivity {
                         }
                         imageView.setImageResource(R.drawable.campus_image);
                         imageView.setTag(R.drawable.campus_image);
+
+                        Intent in = new Intent(getApplicationContext(), BuildingDetail.class);
+                        startActivity(in);
+
                         break;
                 }
                 return true;
