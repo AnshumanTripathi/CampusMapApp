@@ -1,8 +1,8 @@
 package com.anshumantripathi.campusmapapp.util;
 
 import android.app.Activity;
-import com.anshumantripathi.campusmapapp.Model.Coordiantes;
-import com.anshumantripathi.campusmapapp.Model.BuildingData;
+import com.anshumantripathi.campusmapapp.model.Coordiantes;
+import com.anshumantripathi.campusmapapp.model.BuildingData;
 
 public class LocationContext extends Activity {
 

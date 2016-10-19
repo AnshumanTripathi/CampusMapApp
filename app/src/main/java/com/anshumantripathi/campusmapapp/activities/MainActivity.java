@@ -25,13 +25,13 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.anshumantripathi.campusmapapp.Model.BuildingData;
-import com.anshumantripathi.campusmapapp.Model.Coordiantes;
+import com.anshumantripathi.campusmapapp.model.BuildingData;
+import com.anshumantripathi.campusmapapp.model.Coordiantes;
 import com.anshumantripathi.campusmapapp.util.LocationContext;
 import com.anshumantripathi.campusmapapp.R;
 
-import static com.anshumantripathi.campusmapapp.Model.CampusData.buildingData;
-import static com.anshumantripathi.campusmapapp.Model.CampusData.initCampusBoundaries;
+import static com.anshumantripathi.campusmapapp.model.CampusData.buildingData;
+import static com.anshumantripathi.campusmapapp.model.CampusData.initCampusBoundaries;
 
 public class MainActivity extends AppCompatActivity {
 
