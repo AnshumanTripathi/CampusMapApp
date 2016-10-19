@@ -13,40 +13,40 @@ public class CampusData {
         return buildingData;
     }
 
-    public void setBuildingData(ArrayList<BuildingData> buildingData) {
-        this.buildingData = buildingData;
+    public void setBuildingData(ArrayList<BuildingData> userBuildingData) {
+        buildingData = userBuildingData;
     }
 
     public Coordiantes getPoint1() {
         return point1;
     }
 
-    public void setPoint1(Coordiantes point1) {
-        this.point1 = point1;
+    public void setPoint1(Coordiantes userPoint1) {
+        point1 = userPoint1;
     }
 
     public Coordiantes getPoint2() {
         return point2;
     }
 
-    public void setPoint2(Coordiantes point2) {
-        this.point2 = point2;
+    public void setPoint2(Coordiantes userPoint2) {
+        point2 = userPoint2;
     }
 
     public Coordiantes getPoint3() {
         return point3;
     }
 
-    public void setPoint3(Coordiantes point3) {
-        this.point3 = point3;
+    public void setPoint3(Coordiantes userPoint3) {
+        point3 = userPoint3;
     }
 
     public Coordiantes getPoint4() {
         return point4;
     }
 
-    public void setPoint4(Coordiantes point4) {
-        this.point4 = point4;
+    public void setPoint4(Coordiantes userPoint4) {
+        point4 = userPoint4;
     }
 
     public static void initCampusBoundaries() {

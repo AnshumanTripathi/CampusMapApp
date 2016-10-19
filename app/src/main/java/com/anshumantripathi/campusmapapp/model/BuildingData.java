@@ -14,6 +14,15 @@ public class BuildingData {
     public BuildingData(){
 
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public double getLat() {
         return lat;
     }
