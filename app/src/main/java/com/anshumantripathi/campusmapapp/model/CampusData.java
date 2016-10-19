@@ -6,5 +6,4 @@ package com.anshumantripathi.campusmapapp.model;
 
 public class CampusData {
     //Campus boundary and Map with color to building data
-    
 }
