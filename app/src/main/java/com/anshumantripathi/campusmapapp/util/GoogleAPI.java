@@ -49,8 +49,6 @@ public class GoogleAPI extends AsyncTask<String, Void, String> {
         super.onPostExecute(s);
     }
 
-// Converting InputStream to String
-
     private String readStream(InputStream in) {
         BufferedReader reader = null;
         StringBuffer response = new StringBuffer();
