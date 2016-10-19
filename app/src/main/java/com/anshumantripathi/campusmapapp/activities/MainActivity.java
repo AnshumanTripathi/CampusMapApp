@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                         v.draw(canvas);
                         break;
                     case MotionEvent.ACTION_UP:
-                        
+
                         setDestinationLocationInContext(envX, envY);
 
 
