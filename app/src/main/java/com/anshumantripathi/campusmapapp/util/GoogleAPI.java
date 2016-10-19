@@ -1,4 +1,4 @@
-package com.anshumantripathi.campusmapapp;
+package com.anshumantripathi.campusmapapp.util;
 
 import android.content.Context;
 import android.os.AsyncTask;

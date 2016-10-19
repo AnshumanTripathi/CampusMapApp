@@ -1,15 +1,17 @@
-package com.anshumantripathi.campusmapapp;
+package com.anshumantripathi.campusmapapp.model;
 
 /**
  * Created by AnshumanTripathi on 10/18/16.
  */
 
-public class Location {
+public class BuidingData {
+    private String name;
+    //Add image
     private double lat;
     private double lng;
     private String address;
 
-    public Location(){
+    public BuidingData(){
 
     }
     public double getLat() {

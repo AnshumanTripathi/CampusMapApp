@@ -1,10 +1,8 @@
-package com.anshumantripathi.campusmapapp;
+package com.anshumantripathi.campusmapapp.activities;
 
-<<<<<<< Updated upstream
+
 import android.content.Intent;
-=======
 import android.content.Context;
->>>>>>> Stashed changes
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -20,6 +18,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import com.anshumantripathi.campusmapapp.util.LocationContext;
+import com.anshumantripathi.campusmapapp.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                         imageView.setImageResource(R.drawable.campus_image);
                         imageView.setTag(R.drawable.campus_image);
 
-                        Intent in = new Intent(getApplicationContext(), BuildingDetail.class);
+                        Intent in = new Intent(getApplicationContext(), BuildingDetailActivity.class);
                         startActivity(in);
 
                         break;
@@ -76,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         locationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final LocationContext  context = LocationContext.getInstance();
+                final LocationContext context = LocationContext.getInstance();
                 context.displayGpsStatus();
                 LocationManager manager = (LocationManager) MainActivity.this.getSystemService(Context.LOCATION_SERVICE);
                 LocationListener locationListener = new LocationListener() {

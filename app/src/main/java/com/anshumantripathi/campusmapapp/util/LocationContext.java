@@ -1,4 +1,4 @@
-package com.anshumantripathi.campusmapapp;
+package com.anshumantripathi.campusmapapp.util;
 
 import android.Manifest;
 import android.app.Activity;
@@ -11,6 +11,9 @@ import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 
+import com.anshumantripathi.campusmapapp.model.BuidingData;
+import com.anshumantripathi.campusmapapp.model.Coordiantes;
+
 /**
  * Created by AnshumanTripathi on 10/18/16.
  */
@@ -19,7 +22,12 @@ public class LocationContext extends Activity {
 
 
     public static LocationContext instance;
-    private static Location point1, point2, point3, point4;
+
+    Coordiantes currentLocation, destinationLocation;
+    String mode;
+    String distance;
+    String time;
+    private static BuidingData point1, point2, point3, point4; //Add to class CampusData
 
     public static void initCampusBoundaries() {
 
@@ -56,7 +64,7 @@ public class LocationContext extends Activity {
         LocationManager gpsStatus = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (!gpsStatus.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("GPS is disabled. Enable for Location service? ")
+            builder.setMessage("GPS is disabled. Enable for BuidingData service? ")
                     .setCancelable(false)
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
