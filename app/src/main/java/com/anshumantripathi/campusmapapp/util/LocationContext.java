@@ -1,21 +1,22 @@
 package com.anshumantripathi.campusmapapp.util;
 
 import android.app.Activity;
-import com.anshumantripathi.campusmapapp.model.Coordiantes;
+
 import com.anshumantripathi.campusmapapp.model.BuildingData;
+import com.anshumantripathi.campusmapapp.model.Coordinates;
 
 public class LocationContext extends Activity {
 
 
-    public static LocationContext instance;
+    private static LocationContext instance;
 
     public static void setInstance(LocationContext instance) {
         LocationContext.instance = instance;
     }
 
-    private static Coordiantes currentLocation;
+    private static Coordinates currentLocation;
     //this is a redundant param, we can plan to remove it.
-    private static Coordiantes destinationLocation;
+    private static Coordinates destinationLocation;
     private static String mode;
     private static String distance;
     private static String time;
@@ -39,40 +40,40 @@ public class LocationContext extends Activity {
         LocationContext.color = color;
     }
 
-    public void setCurrentLocation(Coordiantes currentLocation) {
-        this.currentLocation = currentLocation;
+    public static void setCurrentLocation(Coordinates newCurrentLocation) {
+        currentLocation = newCurrentLocation;
     }
 
-    public Coordiantes getDestinationLocation() {
+    public static Coordinates getDestinationLocation() {
         return destinationLocation;
     }
 
-    public void setDestinationLocation(Coordiantes destinationLocation) {
-        this.destinationLocation = destinationLocation;
+    public static void setDestinationLocation(Coordinates userDestinationLocation) {
+        destinationLocation = userDestinationLocation;
     }
 
-    public String getMode() {
+    public static String getMode() {
         return mode;
     }
 
-    public void setMode(String mode) {
-        this.mode = mode;
+    public static void setMode(String userMode) {
+        mode = userMode;
     }
 
-    public String getDistance() {
+    public static String getDistance() {
         return distance;
     }
 
-    public void setDistance(String distance) {
-        this.distance = distance;
+    public static void setDistance(String userDistance) {
+        distance = userDistance;
     }
 
-    public String getTime() {
+    public static String getTime() {
         return time;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public static void setTime(String userTime) {
+        time = userTime;
     }
 
     public static LocationContext getInstance() {
@@ -91,4 +92,9 @@ public class LocationContext extends Activity {
         time = null;
         buildData = new BuildingData();
     }
+
+    public static Coordinates getCurrentLocation() {
+        return currentLocation;
+    }
+
 }
