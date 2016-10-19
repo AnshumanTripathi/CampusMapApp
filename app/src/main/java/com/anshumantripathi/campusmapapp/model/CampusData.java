@@ -1,4 +1,4 @@
-package com.anshumantripathi.campusmapapp.Model;
+package com.anshumantripathi.campusmapapp.model;
 
 import java.util.ArrayList;
 

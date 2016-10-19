@@ -1,4 +1,4 @@
-package com.anshumantripathi.campusmapapp.Model;
+package com.anshumantripathi.campusmapapp.model;
 
 /**
  * Created by AnshumanTripathi on 10/18/16.
