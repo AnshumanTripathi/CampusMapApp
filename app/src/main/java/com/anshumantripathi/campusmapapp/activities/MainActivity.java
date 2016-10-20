@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
                 int envX = (int) event.getX();
                 int envY = (int) event.getY();
                 ImageView imageView = (ImageView) v.findViewById(R.id.campusImage);
-
                 switch (action) {
                     case MotionEvent.ACTION_DOWN:
                         RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
@@ -66,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                         v.draw(canvas);
                         break;
                     case MotionEvent.ACTION_UP:
-
+                        
                         setDestinationLocationInContext(envX, envY);
 
 
@@ -191,6 +190,7 @@ public class MainActivity extends AppCompatActivity {
 
         setDestinationBuildingDetails(selectedColor);
     }
+    
 
     private void setDestinationBuildingDetails(int color) {
         BuildingData buil = buildingData.get(color);
