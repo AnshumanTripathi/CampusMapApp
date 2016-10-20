@@ -34,9 +34,9 @@ public class BuildingDetailActivity extends Activity {
 
         //Display all the params on the screen
         bname.setText(ctx.getBuildData().getName());
-        bname.setText(ctx.getBuildData().getAddress());
-        bname.setText(ctx.getDistance());
-        bname.setText(ctx.getTime());
+        baddress.setText(ctx.getBuildData().getAddress());
+        distance.setText(ctx.getDistance());
+        time.setText(ctx.getTime());
 
         //display street view on clicking on the street view button
         streetView.setOnClickListener(new View.OnClickListener() {

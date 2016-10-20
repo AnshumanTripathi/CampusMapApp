@@ -81,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
                                 ctx.getDestinationLocation().getLng(),
                                 ctx.getMode());
 
-
                         //imageView.setImageResource(R.drawable.campus_image);
                         //imageView.setTag(R.drawable.campus_image);
 
@@ -220,15 +219,14 @@ public class MainActivity extends AppCompatActivity {
         try {
             //TODO: Remove this.
             src_lat = 37.368830;
-            src_lng = 122.036350;
+            src_lng = -122.036350;
             des_lat = 37.338208;
             des_lng = -121.886329;
 
             String stringURL = prepareDistanceMatrixURL(src_lat,src_lng,des_lat,des_lng,"bicycling");
             new DistanceMatrixTask().execute(stringURL).toString();
-            //TODO: Cannot find this method
-//            Log.v("Button:", ctx.getDistanceMatrixResp());
-//            parseDistanceMatrix(ctx.getDistanceMatrixResp());
+            Log.v("Button:", ctx.getDistanceMatrixResp());
+            parseDistanceMatrix(ctx.getDistanceMatrixResp());
         } catch (Exception e) {
             Log.v("Ex:Call Asysnc Task",e.toString());
         }
