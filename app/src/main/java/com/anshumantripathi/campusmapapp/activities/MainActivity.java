@@ -2,46 +2,42 @@ package com.anshumantripathi.campusmapapp.activities;
 
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.anshumantripathi.campusmapapp.Model.BuildingData;
-import com.anshumantripathi.campusmapapp.Model.CampusData;
-import com.anshumantripathi.campusmapapp.Model.Coordiantes;
+import com.anshumantripathi.campusmapapp.model.BuildingData;
+import com.anshumantripathi.campusmapapp.model.CampusData;
+import com.anshumantripathi.campusmapapp.model.Coordinates;
 import com.anshumantripathi.campusmapapp.util.DistanceMatrixTask;
 import com.anshumantripathi.campusmapapp.util.LocationContext;
 import com.anshumantripathi.campusmapapp.R;
 import com.anshumantripathi.campusmapapp.util.TravelMode;
 
 import org.json.JSONObject;
-
-import static com.anshumantripathi.campusmapapp.Model.CampusData.buildingData;
-import static com.anshumantripathi.campusmapapp.Model.CampusData.initCampusBoundaries;
+import static com.anshumantripathi.campusmapapp.model.CampusData.initCampusBoundaries;
 
 public class MainActivity extends AppCompatActivity {
 
-    final LocationContext ctx = LocationContext.getInstance();
+    private static final int ACCESS_COARSE_LOCATION = 1;
+    LocationContext ctx = LocationContext.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         initCampusBoundaries();
 
         final ImageView campusImage = (ImageView) findViewById(R.id.campusImage);
-        ctx.resetContext();
+        LocationContext.resetContext();
 
         campusImage.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -64,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (action) {
                     case MotionEvent.ACTION_DOWN:
                         RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                        ; //Assuming you use a RelativeLayout
+                        //Assuming you use a RelativeLayout
                         ImageView iv = new ImageView(getApplicationContext());
                         lp.setMargins(envX, envY, 0, 0);
                         iv.setLayoutParams(lp);
@@ -77,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
                     case MotionEvent.ACTION_UP:
                         ctx.setMode(TravelMode.BICYCLING.name());
 
-                        setCurrentLocationInContext();
                         setDestinationLocationInContext(envX, envY);
 
                         setDistanceTimeInContext(ctx.getDestinationLocation().getLat(),
@@ -99,38 +94,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button locationButton = (Button) findViewById(R.id.location);
-        locationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final LocationContext context = LocationContext.getInstance();
-                displayGpsStatus();
-                LocationManager manager = (LocationManager) MainActivity.this.getSystemService(Context.LOCATION_SERVICE);
-                LocationListener locationListener = new LocationListener() {
-                    @Override
-                    public void onLocationChanged(Location location) {
-
-                    }
-
-                    @Override
-                    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-                    }
-
-                    @Override
-                    public void onProviderEnabled(String provider) {
-
-                    }
-
-                    @Override
-                    public void onProviderDisabled(String provider) {
-
-                    }
-                };
-
-            }
-        });
-
+//        Button locationButton = (Button) findViewById(R.id.location);
     }
 
 
@@ -143,68 +107,76 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public boolean closeMatch(int color1, int color2, int tolerance) {
-        System.out.println((int) Math.abs(Color.red(color1) - Color.red(color2)));
-        if ((int) Math.abs(Color.red(color1) - Color.red(color2)) > tolerance)
+        if (Math.abs(Color.red(color1) - Color.red(color2)) > tolerance)
             return false;
-        System.out.println((int) Math.abs(Color.green(color1) - Color.green(color2)));
-        if ((int) Math.abs(Color.green(color1) - Color.green(color2)) > tolerance)
+        if (Math.abs(Color.green(color1) - Color.green(color2)) > tolerance)
             return false;
-        if ((int) Math.abs(Color.blue(color1) - Color.blue(color2)) > tolerance)
+        if (Math.abs(Color.blue(color1) - Color.blue(color2)) > tolerance)
             return false;
         return true;
     }
 
-    private void setCurrentLocationInContext() {
-        Coordiantes currC = new Coordiantes();
-        //TODO: Anshuman, set here the current location coordinates,
-        //Setting dummy values here now.
-        currC.setLng(37.335848);
-        currC.setLat(-121.886039);
-    }
-
     public void displayGpsStatus() {
-        LocationManager gpsStatus = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        if (!gpsStatus.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("GPS is disabled. Enable for BuildingData service? ")
-                    .setCancelable(false)
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(@SuppressWarnings("unused") DialogInterface dialog, @SuppressWarnings("unused") int which) {
-                            startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
-                        }
-                    })
-                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                        }
-                    });
-
-            AlertDialog dialog = builder.create();
-            dialog.show();
-        }
-    }
-
-    public void findCurrentLocation() {
-        LocationManager locationManager = (LocationManager) getBaseContext().getSystemService(LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, ACCESS_COARSE_LOCATION);
         }
-        locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        getCurrentLocation();
+
 
     }
 
-//    public boolean isLocationInCampus(){
-//
-//    }
+    public void getCurrentLocation() {
+        displayGpsStatus();
+        LocationManager locationManager = (LocationManager) getBaseContext().getSystemService(LOCATION_SERVICE);
+
+        try {
+            LocationContext.getCurrentLocation().setLat(locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLatitude());
+            LocationContext.getCurrentLocation().setLng(locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLongitude());
+        } catch (SecurityException permissionException) {
+            Toast.makeText(getBaseContext(), "Location permission might be missing. Check GPS", Toast.LENGTH_SHORT).show();
+            displayGpsStatus();
+        }
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        LocationManager gpsStatus = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        switch (requestCode) {
+            case ACCESS_COARSE_LOCATION:
+                if (permissions.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (!gpsStatus.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+                        builder.setMessage("GPS is disabled. Enable for Location service? ")
+                                .setCancelable(false)
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(@SuppressWarnings("unused") DialogInterface dialog, @SuppressWarnings("unused") int which) {
+                                        startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                                    }
+                                })
+                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                        android.app.AlertDialog dialog = builder.create();
+                        dialog.show();
+                    }
+                } else {
+                    Toast.makeText(getBaseContext(), "App requries Location to perform all Features", Toast.LENGTH_SHORT).show();
+                    try {
+                        LocationContext.getCurrentLocation().setLat(gpsStatus.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLatitude());
+                        LocationContext.getCurrentLocation().setLng(gpsStatus.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLongitude());
+                    } catch (SecurityException permissionException) {
+                        Toast.makeText(getBaseContext(), "Exception in Fetching last known location", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                break;
+        }
+    }
 
     private void setDestinationLocationInContext(int envX, int envY) {
         int color = getHotspotColor(R.id.imageOverlay, envX, envY);
@@ -215,7 +187,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "Engineering Building", Toast.LENGTH_SHORT).show();
             LocationContext.getInstance().setColor(1);
             selectedColor = 0;
-
 
         } else if (closeMatch(Color.GREEN, color, 40)) {
 
@@ -235,12 +206,12 @@ public class MainActivity extends AppCompatActivity {
         CampusData cd = new CampusData();
         BuildingData buil = cd.getBuildingData().get(color);
 
-        Coordiantes destC = new Coordiantes();
+        Coordinates destC = new Coordinates();
         destC.setLat(buil.getLat());
         destC.setLng(buil.getLng());
 
-        ctx.setDestinationLocation(destC);
-        ctx.setBuildData(buil);
+        LocationContext.setDestinationLocation(destC);
+        LocationContext.setBuildData(buil);
     }
 
     /*This method will find out the distance and time between 2 points and sets in the location context.

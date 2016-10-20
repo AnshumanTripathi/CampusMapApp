@@ -1,10 +1,11 @@
-package com.anshumantripathi.campusmapapp.Model;
+package com.anshumantripathi.campusmapapp.model;
 
 /**
- * Created by AnshumanTripathi on 10/18/16.
+ * Created by AnshumanTripathi on 10/19/16.
  */
 
-public class Coordiantes {
+public class Coordinates {
+
     private double lat;
     private double lng;
 
@@ -24,3 +25,4 @@ public class Coordiantes {
         this.lng = lng;
     }
 }
+
