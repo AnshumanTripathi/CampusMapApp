@@ -21,6 +21,16 @@ public class LocationContext extends Activity {
     private static String time;
     private static int color;
     private static BuildingData buildData;
+    private static String distanceMatrixResp;
+
+    public static String getDistanceMatrixResp() {
+        return distanceMatrixResp;
+    }
+
+    public static void setDistanceMatrixResp(String distanceMatrixResp) {
+        LocationContext.distanceMatrixResp = distanceMatrixResp;
+    }
+
 
     public static BuildingData getBuildData() {
         return buildData;
@@ -41,6 +51,10 @@ public class LocationContext extends Activity {
 
     public void setCurrentLocation(Coordiantes currentLocation) {
         this.currentLocation = currentLocation;
+    }
+
+    public Coordiantes getCurrentLocation() {
+        return currentLocation;
     }
 
     public Coordiantes getDestinationLocation() {

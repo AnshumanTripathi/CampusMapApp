@@ -1,9 +1,7 @@
 package com.anshumantripathi.campusmapapp.util;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,15 +10,13 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class GoogleAPI extends AsyncTask<String, Void, String> {
-
-    public static String server_response;
+public class DistanceMatrixTask extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... strings) {
 
         URL url;
-        HttpURLConnection urlConnection = null;
+        HttpURLConnection urlConnection;
 
         try {
             String stringURL = strings[0];
@@ -30,9 +26,9 @@ public class GoogleAPI extends AsyncTask<String, Void, String> {
             int responseCode = urlConnection.getResponseCode();
 
             if (responseCode == HttpURLConnection.HTTP_OK) {
-                server_response = readStream(urlConnection.getInputStream());
+                String server_response = readStream(urlConnection.getInputStream());
+                LocationContext.getInstance().setDistanceMatrixResp(server_response);
                 Log.v("CatalogClient", server_response);
-                return server_response;
             }
 
         } catch (MalformedURLException e) {
@@ -72,4 +68,4 @@ public class GoogleAPI extends AsyncTask<String, Void, String> {
         return response.toString();
     }
 
-    }
+}
