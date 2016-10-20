@@ -23,56 +23,56 @@ public class LocationContext extends Activity {
     private static int color;
     private static BuildingData buildData;
 
-    public static BuildingData getBuildData() {
+    public  BuildingData getBuildData() {
         return buildData;
     }
 
-    public static void setBuildData(BuildingData buildData) {
-        LocationContext.buildData = buildData;
+    public  void setBuildData(BuildingData newBuildData) {
+        buildData = newBuildData;
     }
 
 
-    public static int getColor() {
+    public int getColor() {
         return color;
     }
 
-    public static void setColor(int color) {
-        LocationContext.color = color;
+    public void setColor(int newColor) {
+        color = newColor;
     }
 
-    public static void setCurrentLocation(Coordinates newCurrentLocation) {
+    public void setCurrentLocation(Coordinates newCurrentLocation) {
         currentLocation = newCurrentLocation;
     }
 
-    public static Coordinates getDestinationLocation() {
+    public Coordinates getDestinationLocation() {
         return destinationLocation;
     }
 
-    public static void setDestinationLocation(Coordinates userDestinationLocation) {
+    public void setDestinationLocation(Coordinates userDestinationLocation) {
         destinationLocation = userDestinationLocation;
     }
 
-    public static String getMode() {
+    public String getMode() {
         return mode;
     }
 
-    public static void setMode(String userMode) {
+    public void setMode(String userMode) {
         mode = userMode;
     }
 
-    public static String getDistance() {
+    public String getDistance() {
         return distance;
     }
 
-    public static void setDistance(String userDistance) {
+    public void setDistance(String userDistance) {
         distance = userDistance;
     }
 
-    public static String getTime() {
+    public String getTime() {
         return time;
     }
 
-    public static void setTime(String userTime) {
+    public void setTime(String userTime) {
         time = userTime;
     }
 
@@ -84,7 +84,7 @@ public class LocationContext extends Activity {
         }
     }
 
-    public static void resetContext() {
+    public void resetContext() {
         currentLocation = null;
         destinationLocation = null;
         mode = null;
@@ -93,7 +93,7 @@ public class LocationContext extends Activity {
         buildData = new BuildingData();
     }
 
-    public static Coordinates getCurrentLocation() {
+    public Coordinates getCurrentLocation() {
         return currentLocation;
     }
 

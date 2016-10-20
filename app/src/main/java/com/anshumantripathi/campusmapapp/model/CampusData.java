@@ -13,6 +13,21 @@ public class CampusData {
         return buildingData;
     }
 
+    public CampusData() {
+        populateBuildingDetails();
+    }
+
+    private void populateBuildingDetails() {
+        buildingData = new ArrayList<>();
+        BuildingData bd = new BuildingData();
+        bd.setName("Engineering Building");
+        bd.setAddress("San Jose Campus");
+        bd.setLat(37.338208);
+        bd.setLng(-121.886329);
+
+        buildingData.add(bd);
+    }
+
     public void setBuildingData(ArrayList<BuildingData> userBuildingData) {
         buildingData = userBuildingData;
     }
