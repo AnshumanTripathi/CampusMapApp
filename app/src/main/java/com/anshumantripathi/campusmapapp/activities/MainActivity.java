@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -111,6 +112,12 @@ public class MainActivity extends AppCompatActivity {
         if (Math.abs(Color.green(color1) - Color.green(color2)) > tolerance)
             return false;
         if (Math.abs(Color.blue(color1) - Color.blue(color2)) > tolerance)
+            return false;
+        if (Math.abs(Color.YELLOW)>tolerance)
+            return false;
+        if (Math.abs(Color.BLACK)>tolerance)
+            return false;
+        if (Math.abs(Color.CYAN)>tolerance)
             return false;
         return true;
     }
