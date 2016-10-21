@@ -1,6 +1,7 @@
 package com.anshumantripathi.campusmapapp.util;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 
 import com.anshumantripathi.campusmapapp.model.BuildingData;
 import com.anshumantripathi.campusmapapp.model.Coordinates;
@@ -23,7 +24,15 @@ public class LocationContext extends Activity {
     private static int color;
     private static BuildingData buildData;
     private static String distanceMatrixResp;
+    private static Bitmap streetViewImg;
 
+    public static Bitmap getStreetViewImg() {
+        return streetViewImg;
+    }
+
+    public static void setStreetViewImg(Bitmap streetViewImg) {
+        LocationContext.streetViewImg = streetViewImg;
+    }
 
     public static String getDistanceMatrixResp() {
         return distanceMatrixResp;

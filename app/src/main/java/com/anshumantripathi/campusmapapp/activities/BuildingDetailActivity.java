@@ -1,17 +1,14 @@
 package com.anshumantripathi.campusmapapp.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.anshumantripathi.campusmapapp.util.DistanceMatrixTask;
 import com.anshumantripathi.campusmapapp.R;
 import com.anshumantripathi.campusmapapp.util.LocationContext;
-
-import org.json.JSONObject;
 
 public class BuildingDetailActivity extends Activity {
     Button streetView;
@@ -42,6 +39,8 @@ public class BuildingDetailActivity extends Activity {
         streetView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent in = new Intent(getApplicationContext(), StreetViewActivity.class);
+                startActivity(in);
 
 
             }
