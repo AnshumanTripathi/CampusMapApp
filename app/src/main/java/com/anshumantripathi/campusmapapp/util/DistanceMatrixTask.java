@@ -11,6 +11,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class DistanceMatrixTask extends AsyncTask<String, Void, String> {
+    String server_response;
 
     @Override
     protected String doInBackground(String... strings) {
@@ -26,8 +27,7 @@ public class DistanceMatrixTask extends AsyncTask<String, Void, String> {
             int responseCode = urlConnection.getResponseCode();
 
             if (responseCode == HttpURLConnection.HTTP_OK) {
-                String server_response = readStream(urlConnection.getInputStream());
-                LocationContext.getInstance().setDistanceMatrixResp(server_response);
+                server_response = readStream(urlConnection.getInputStream());
                 Log.v("CatalogClient", server_response);
             }
 
@@ -43,6 +43,7 @@ public class DistanceMatrixTask extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
+        LocationContext.getInstance().setDistanceMatrixResp(server_response);
     }
 
     private String readStream(InputStream in) {

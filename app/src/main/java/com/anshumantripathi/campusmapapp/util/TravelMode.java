@@ -5,5 +5,5 @@ package com.anshumantripathi.campusmapapp.util;
  */
 
 public enum TravelMode {
-    BICYCLING,WALK,DRIVE
+    BICYCLING,WALKING,DRIVING
 }
