@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -49,8 +50,17 @@
         android:text="time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/time"
+        android:layout_centerVertical="true"
+        android:layout_alignEnd="@+id/distance" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/pin"
         android:layout_below="@+id/distance"
-        android:layout_alignEnd="@+id/distance"
-        android:layout_marginTop="67dp"
-        android:id="@+id/time" />
+        android:layout_toStartOf="@+id/streetview"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="55dp"
+        android:id="@+id/bimage" />
 </RelativeLayout>

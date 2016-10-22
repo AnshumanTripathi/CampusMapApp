@@ -5,5 +5,5 @@ package com.anshumantripathi.campusmapapp.util;
  */
 
 public enum BuildingColor {
-    RED, GREEN, YELLOW, BLUE, BLACK, WHITE
+    YELLOW, RED, BLUE, GREEN, BLACK, CYAN
 }

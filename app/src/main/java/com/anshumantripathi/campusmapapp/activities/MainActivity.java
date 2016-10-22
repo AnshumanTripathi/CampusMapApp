@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
                 switch (action) {
                     case MotionEvent.ACTION_DOWN:
                         RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                        //Assuming you use a RelativeLayout
                         ImageView iv = new ImageView(getApplicationContext());
                         lp.setMargins(envX, envY, 0, 0);
                         iv.setLayoutParams(lp);
@@ -82,9 +81,6 @@ public class MainActivity extends AppCompatActivity {
                                 ctx.getDestinationLocation().getLng(),
                                 ctx.getMode());
 
-                        //imageView.setImageResource(R.drawable.campus_image);
-                        //imageView.setTag(R.drawable.campus_image);
-
                         Intent in = new Intent(getApplicationContext(), BuildingDetailActivity.class);
                         startActivity(in);
 
@@ -94,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        Button locationButton = (Button) findViewById(R.id.location);
     }
 
 
@@ -188,18 +183,37 @@ public class MainActivity extends AppCompatActivity {
         int color = getHotspotColor(R.id.imageOverlay, envX, envY);
         int selectedColor = 0;
 
-        if (closeMatch(Color.RED, color, 40)) {
+        if (closeMatch(Color.YELLOW, color, 40)) {
 
-            Toast.makeText(MainActivity.this, "Engineering Building", Toast.LENGTH_SHORT).show();
-            LocationContext.getInstance().setColor(1);
+            Toast.makeText(MainActivity.this, "Library", Toast.LENGTH_SHORT).show();
+            LocationContext.getInstance().setColor(0);
             selectedColor = 0;
 
-        } else if (closeMatch(Color.GREEN, color, 40)) {
+        } else if (closeMatch(Color.RED, color, 40)) {
+            Toast.makeText(MainActivity.this, "Engineering Building", Toast.LENGTH_SHORT).show();
+            LocationContext.getInstance().setColor(1);
+            selectedColor = 1;
 
-            Toast.makeText(MainActivity.this, "Student Union Building", Toast.LENGTH_SHORT).show();
-        } else if (closeMatch(Color.YELLOW, color, 40)) {
+        } else if (closeMatch(Color.BLUE, color, 40)) {
+            Toast.makeText(MainActivity.this, "YC Hall", Toast.LENGTH_SHORT).show();
+            LocationContext.getInstance().setColor(2);
+            selectedColor = 2;
 
-            Toast.makeText(MainActivity.this, "Library Building", Toast.LENGTH_SHORT).show();
+        } else if(closeMatch(Color.GREEN, color, 40)) {
+            Toast.makeText(MainActivity.this, "Student Union", Toast.LENGTH_SHORT).show();
+            LocationContext.getInstance().setColor(3);
+            selectedColor = 3;
+
+        } else if(closeMatch(Color.BLACK, color, 40)) {
+            Toast.makeText(MainActivity.this, "BBC", Toast.LENGTH_SHORT).show();
+            LocationContext.getInstance().setColor(4);
+            selectedColor = 4;
+
+        } else if(closeMatch(Color.CYAN, color, 40)) {
+            Toast.makeText(MainActivity.this, "South Parking Garage", Toast.LENGTH_SHORT).show();
+            LocationContext.getInstance().setColor(5);
+            selectedColor = 5;
+
         }
 
         setDestinationBuildingDetails(selectedColor);

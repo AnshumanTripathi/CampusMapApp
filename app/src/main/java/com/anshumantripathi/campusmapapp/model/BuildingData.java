@@ -1,18 +1,31 @@
 package com.anshumantripathi.campusmapapp.model;
 
+import android.graphics.Bitmap;
+
+import static android.R.attr.bitmap;
+
 /**
  * Created by AnshumanTripathi on 10/18/16.
  */
 
 public class BuildingData {
     private String name;
-    //Add image
+    private int bimage;
     private double lat;
     private double lng;
     private String address;
 
+
     public BuildingData(){
 
+    }
+
+    public int getBimage() {
+        return bimage;
+    }
+
+    public void setBimage(int bimage) {
+        this.bimage = bimage;
     }
 
     public String getName() {
