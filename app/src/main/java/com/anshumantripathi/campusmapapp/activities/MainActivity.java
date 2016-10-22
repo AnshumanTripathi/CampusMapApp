@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.anshumantripathi.campusmapapp.model.BuildingData;
 import com.anshumantripathi.campusmapapp.model.CampusData;
 import com.anshumantripathi.campusmapapp.model.Coordinates;
+import com.anshumantripathi.campusmapapp.util.Constants;
 import com.anshumantripathi.campusmapapp.util.DistanceMatrixTask;
 import com.anshumantripathi.campusmapapp.util.LocationContext;
 import com.anshumantripathi.campusmapapp.R;
@@ -182,34 +183,35 @@ public class MainActivity extends AppCompatActivity {
     private void setDestinationLocationInContext(int envX, int envY) {
         int color = getHotspotColor(R.id.imageOverlay, envX, envY);
         int selectedColor = 0;
+        Log.v("Color clicked:",Integer.toString(color));
 
-        if (closeMatch(Color.YELLOW, color, 40)) {
+        if (closeMatch(Color.YELLOW, color, Constants.TOLERANCE)) {
 
             Toast.makeText(MainActivity.this, "Library", Toast.LENGTH_SHORT).show();
             LocationContext.getInstance().setColor(0);
             selectedColor = 0;
 
-        } else if (closeMatch(Color.RED, color, 40)) {
+        } else if (closeMatch(Color.RED, color, Constants.TOLERANCE)) {
             Toast.makeText(MainActivity.this, "Engineering Building", Toast.LENGTH_SHORT).show();
             LocationContext.getInstance().setColor(1);
             selectedColor = 1;
 
-        } else if (closeMatch(Color.BLUE, color, 40)) {
+        } else if (closeMatch(Color.BLUE, color, Constants.TOLERANCE)) {
             Toast.makeText(MainActivity.this, "YC Hall", Toast.LENGTH_SHORT).show();
             LocationContext.getInstance().setColor(2);
             selectedColor = 2;
 
-        } else if(closeMatch(Color.GREEN, color, 40)) {
+        } else if(closeMatch(Color.GREEN, color, Constants.TOLERANCE)) {
             Toast.makeText(MainActivity.this, "Student Union", Toast.LENGTH_SHORT).show();
             LocationContext.getInstance().setColor(3);
             selectedColor = 3;
 
-        } else if(closeMatch(Color.BLACK, color, 40)) {
+        } else if(closeMatch(Color.BLACK, color, Constants.TOLERANCE)) {
             Toast.makeText(MainActivity.this, "BBC", Toast.LENGTH_SHORT).show();
             LocationContext.getInstance().setColor(4);
             selectedColor = 4;
 
-        } else if(closeMatch(Color.CYAN, color, 40)) {
+        } else if(closeMatch(Color.CYAN, color, Constants.TOLERANCE)) {
             Toast.makeText(MainActivity.this, "South Parking Garage", Toast.LENGTH_SHORT).show();
             LocationContext.getInstance().setColor(5);
             selectedColor = 5;
