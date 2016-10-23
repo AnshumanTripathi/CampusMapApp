@@ -135,12 +135,6 @@ public class MainActivity extends AppCompatActivity {
             return false;
         if (Math.abs(Color.blue(color1) - Color.blue(color2)) > tolerance)
             return false;
-        if (Math.abs(Color.YELLOW)>tolerance)
-            return false;
-        if (Math.abs(Color.BLACK)>tolerance)
-            return false;
-        if (Math.abs(Color.CYAN)>tolerance)
-            return false;
         return true;
     }
 
