@@ -26,7 +26,7 @@ public class LocationContext extends Activity {
     private static String distanceMatrixResp;
     private static Bitmap streetViewImg;
 
-    public static Bitmap getStreetViewImg() {
+    public Bitmap getStreetViewImg() {
         return streetViewImg;
     }
 

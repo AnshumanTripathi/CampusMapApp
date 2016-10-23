@@ -28,7 +28,7 @@ public class StreetViewTask extends AsyncTask<String, Void, String> {
         HttpURLConnection urlConnection;
 
         try {
-            String stringURL = "https://maps.googleapis.com/maps/api/streetview?size=100x100&location=46.414382,10.013988";
+            String stringURL = strings[0];
             url = new URL(stringURL);
             urlConnection = (HttpURLConnection) url.openConnection();
 
@@ -67,7 +67,6 @@ public class StreetViewTask extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        Log.v("image----------------->",img.toString());
         LocationContext.getInstance().setStreetViewImg(img);
     }
 }

@@ -76,15 +76,18 @@ public class MainActivity extends AppCompatActivity {
 
                         setDestinationLocationInContext(envX, envY);
 
-                        setDistanceTimeInContext(ctx.getDestinationLocation().getLat(),
-                                ctx.getDestinationLocation().getLng(),
-                                ctx.getDestinationLocation().getLat(),
-                                ctx.getDestinationLocation().getLng(),
-                                ctx.getMode());
+                        //TODO: Remove this.
+                        double src_lat = 37.368830;
+                        double src_lng = -122.036350;
+                        double des_lat = 37.338208;
+                        double des_lng = -121.886329;
 
-                        Intent in = new Intent(getApplicationContext(), BuildingDetailActivity.class);
-                        startActivity(in);
-
+                        String stringURL = prepareDistanceMatrixURL(src_lat,src_lng,des_lat,des_lng,"bicycling");
+                        try {
+                            new DistanceMatrixTask(getApplicationContext()).execute(stringURL).get();
+                        }catch(Exception e) {
+                            e.printStackTrace();
+                        }
                         break;
                 }
                 return true;
@@ -236,63 +239,6 @@ public class MainActivity extends AppCompatActivity {
         ctx.setBuildData(buil);
     }
 
-    /*This method will find out the distance and time between 2 points and sets in the location context.
-    * It calls the background async task to obtain the response.*/
-    private void setDistanceTimeInContext(double src_lat, double src_lng, double des_lat, double des_lng, String mode) {
-        try {
-            //TODO: Remove this.
-            src_lat = 37.368830;
-            src_lng = -122.036350;
-            des_lat = 37.338208;
-            des_lng = -121.886329;
-
-            String stringURL = prepareDistanceMatrixURL(src_lat,src_lng,des_lat,des_lng,"bicycling");
-            new DistanceMatrixTask().execute(stringURL).toString();
-            Log.v("Button:", ctx.getDistanceMatrixResp());
-            parseDistanceMatrix(ctx.getDistanceMatrixResp());
-        } catch (Exception e) {
-            Log.v("Ex:Call Asysnc Task",e.toString());
-        }
-    }
-
-    /*This method will parse the response received from the Google API - DistanceMatrix
-    * It also finds out the distance and time from the response and set it in Context*/
-    private void parseDistanceMatrix(String httpResponse) {
-        try {
-            JSONObject jsonRespRouteDistance = new JSONObject(httpResponse)
-                    .getJSONArray("rows")
-                    .getJSONObject(0)
-                    .getJSONArray("elements")
-                    .getJSONObject(0)
-                    .getJSONObject("distance");
-            String distance = jsonRespRouteDistance.get("text").toString();
-
-            JSONObject jsonRespRouteTime = new JSONObject(httpResponse)
-                    .getJSONArray("rows")
-                    .getJSONObject(0)
-                    .getJSONArray("elements")
-                    .getJSONObject(0)
-                    .getJSONObject("duration");
-            String time = jsonRespRouteTime.get("text").toString();
-
-            String destination_addr = new JSONObject(httpResponse)
-                    .get("destination_addresses")
-                    .toString();
-
-            Log.v("Distance:", distance);
-            Log.v("Destination address:", destination_addr);
-            Log.v("Time:", time);
-
-            //set these values in context
-            ctx.setDistance(distance);
-            ctx.setTime(time);
-
-        } catch (Exception ex) {
-            Log.v("Ex:Parsing response", ex.toString());
-        }
-
-    }
-
     /*This method will prepare the Google API UrL to obtain the distance and time between two points.*/
     private String prepareDistanceMatrixURL(double src_lat, double src_long, double des_lat, double des_long, String mode) {
         String stringURL = "";
@@ -309,7 +255,7 @@ public class MainActivity extends AppCompatActivity {
                     mode;
             return stringURL;
         } catch (Exception ex) {
-            Log.v("Prepare URL exception", ex.toString());
+            ex.printStackTrace();
         }
         return null;
     }

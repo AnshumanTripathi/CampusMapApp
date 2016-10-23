@@ -3,13 +3,20 @@ package com.anshumantripathi.campusmapapp.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.anshumantripathi.campusmapapp.R;
+import com.anshumantripathi.campusmapapp.util.Constants;
+import com.anshumantripathi.campusmapapp.util.DistanceMatrixTask;
 import com.anshumantripathi.campusmapapp.util.LocationContext;
+import com.anshumantripathi.campusmapapp.util.StreetViewTask;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 public class BuildingDetailActivity extends Activity {
     Button streetView;
@@ -43,13 +50,29 @@ public class BuildingDetailActivity extends Activity {
         streetView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String address = LocationContext.getInstance().getBuildData().getAddress();
+                try {
+                    new StreetViewTask().execute(prepareStreetViewURL(Constants.STREETV_X, Constants.STREETV_Y, address)).get();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 Intent in = new Intent(getApplicationContext(), StreetViewActivity.class);
                 startActivity(in);
-
-
             }
         });
     }
 
+    private String prepareStreetViewURL(int sizeX, int sizeY, String address) {
+        String newAddress = address.replace(" ","%20");
+        String url = "";
 
+        url += "https://maps.googleapis.com/maps/api/streetview?";
+        url += "size=" + Integer.toString(sizeX) + "x" + Integer.toString(sizeY);
+        url += "&location=";
+        url += newAddress;
+
+
+        Log.v("URL:",url);
+        return url;
+    }
 }

@@ -18,7 +18,6 @@ public class StreetViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_street_view);
 
         streetview = (ImageView)findViewById(R.id.streetview);
-        new DistanceMatrixTask().execute("https://maps.googleapis.com/maps/api/streetview?size=600x300&location=46.414382,10.013988").toString();
         streetview.setImageBitmap(LocationContext.getInstance().getStreetViewImg());
     }
 }
