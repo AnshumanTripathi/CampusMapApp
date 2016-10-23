@@ -8,4 +8,5 @@ public class Constants {
     public static final int TOLERANCE = 40;
     public static final int STREETV_X = 200;
     public static final int STREETV_Y = 200;
+    public static final int BUILD_COUNT = 6;
 }

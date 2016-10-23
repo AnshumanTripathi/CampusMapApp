@@ -20,6 +20,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -34,6 +36,10 @@ import com.anshumantripathi.campusmapapp.R;
 import com.anshumantripathi.campusmapapp.util.TravelMode;
 
 import org.json.JSONObject;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 import static com.anshumantripathi.campusmapapp.model.CampusData.initCampusBoundaries;
 
 public class MainActivity extends AppCompatActivity {
@@ -41,15 +47,32 @@ public class MainActivity extends AppCompatActivity {
     private static final int ACCESS_COARSE_LOCATION = 1;
     LocationContext ctx = LocationContext.getInstance();
 
+    EditText searchbar;
+    Button searchbutton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        searchbar = (EditText) findViewById(R.id.searchbar);
+        searchbutton = (Button) findViewById(R.id.searchbutton);
+
         initCampusBoundaries();
 
         final ImageView campusImage = (ImageView) findViewById(R.id.campusImage);
         LocationContext.getInstance().resetContext();
+
+        searchbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String searchQuery = searchbar.getText().toString();
+                ArrayList<String> searchResult = searchBuilding(searchQuery);
+                for(int id = 0; id < Constants.BUILD_COUNT; id++) {
+                    Log.v("output:",searchResult.get(id));
+                }
+            }
+        });
 
         campusImage.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -260,5 +283,16 @@ public class MainActivity extends AppCompatActivity {
         return null;
     }
 
+
+    public ArrayList<String> searchBuilding(String searchQuery) {
+        ArrayList<String> matchNames = new ArrayList<>();
+        for(int id = 0; id < Constants.BUILD_COUNT; id++) {
+            String builName = CampusData.buildingData.get(id).getName();
+            if (builName.compareToIgnoreCase(searchQuery) == 0) {
+                matchNames.add(builName);
+            }
+        }
+        return matchNames;
+    }
 }
 

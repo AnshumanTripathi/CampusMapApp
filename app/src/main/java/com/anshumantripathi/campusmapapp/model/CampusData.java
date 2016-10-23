@@ -10,6 +10,7 @@ public class CampusData {
     private static Coordinates point3;
     private static Coordinates point4;
     public static ArrayList<BuildingData> buildingData;
+    public static ArrayList<String> buildingName;
 
     public ArrayList<BuildingData> getBuildingData() {
         return buildingData;
