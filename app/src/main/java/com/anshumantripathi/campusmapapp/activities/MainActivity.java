@@ -11,6 +11,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -124,7 +126,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -151,16 +152,17 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    public void displayGpsStatus() {
+    public void checkPermission() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, ACCESS_COARSE_LOCATION);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, ACCESS_COARSE_LOCATION);
         }
 
     }
 
     public void getCurrentLocation() {
-        displayGpsStatus();
         LocationManager locationManager = (LocationManager) MainActivity.this.getSystemService(LOCATION_SERVICE);
+        boolean isGpsOn = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        boolean isNetworkOn = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
         try {
             final Coordinates currentLocation = new Coordinates();
             LocationListener locationListener = new LocationListener() {
@@ -183,15 +185,30 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             };
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-            currentLocation.setLat(locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLatitude());
-            currentLocation.setLng(locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLongitude());
-            ctx.setCurrentLocation(currentLocation);
-            System.out.println(ctx.getCurrentLocation().toString());
-            Toast.makeText(MainActivity.this, ctx.getCurrentLocation().toString(), Toast.LENGTH_SHORT).show();
+            if (isGpsOn && isNetworkOn && locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER) != null) {
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+                currentLocation.setLat(locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLatitude());
+                currentLocation.setLng(locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLongitude());
+                ctx.setCurrentLocation(currentLocation);
+                System.out.println(ctx.getCurrentLocation().toString());
+                Toast.makeText(MainActivity.this, ctx.getCurrentLocation().toString(), Toast.LENGTH_SHORT).show();
+            } else if (isNetworkOn) {
+                locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+                String bestProvider = locationManager.getBestProvider(new Criteria(), false);
+                Location location = locationManager.getLastKnownLocation(bestProvider);
+                try {
+                    currentLocation.setLat(location.getLatitude());
+                    currentLocation.setLng(location.getLongitude());
+                    ctx.setCurrentLocation(currentLocation);
+                } catch (NullPointerException e) {
+                    Toast.makeText(MainActivity.this, "Exception Occured while fetching location!", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(MainActivity.this, "Cannot get Location! Check Network & GPS", Toast.LENGTH_SHORT).show();
+            }
         } catch (SecurityException permissionException) {
             Toast.makeText(getBaseContext(), "Location permission might be missing. Check GPS", Toast.LENGTH_SHORT).show();
-            displayGpsStatus();
+            checkPermission();
         }
 
     }
@@ -237,12 +254,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void setDestinationLocationInContext(int envX, int envY) {
         int color = getHotspotColor(R.id.imageOverlay, envX, envY);
-        int selectedColor = -1;
+        int selectedColor=-1;
         Log.v("Color clicked:", Integer.toString(color));
 
-        if (closeMatch(Color.WHITE, color, Constants.TOLERANCE)) {
-            Toast.makeText(MainActivity.this, "Empty", Toast.LENGTH_SHORT).show();
-        } else if (closeMatch(Color.YELLOW, color, Constants.TOLERANCE)) {
+        if(closeMatch(Color.WHITE,color,Constants.TOLERANCE)){
+            Toast.makeText(MainActivity.this,"Empty",Toast.LENGTH_SHORT).show();
+        }else
+        if (closeMatch(Color.YELLOW, color, Constants.TOLERANCE)) {
             Toast.makeText(MainActivity.this, "Library", Toast.LENGTH_SHORT).show();
             LocationContext.getInstance().setColor(0);
             selectedColor = 0;
@@ -273,8 +291,9 @@ public class MainActivity extends AppCompatActivity {
             selectedColor = 5;
 
         }
-        if (selectedColor == -1) {
-        } else
+        if(selectedColor == -1) {
+        }
+        else
             setDestinationBuildingDetails(selectedColor);
     }
 
@@ -282,6 +301,7 @@ public class MainActivity extends AppCompatActivity {
     private void setDestinationBuildingDetails(int color) {
 
         Log.v("Color:", Integer.toString(color));
+        CampusData cd = new CampusData();
         BuildingData buil = cd.getBuildingData().get(color);
 
         Coordinates destC = new Coordinates();
