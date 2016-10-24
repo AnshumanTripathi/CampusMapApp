@@ -11,7 +11,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -39,10 +38,7 @@ import com.anshumantripathi.campusmapapp.util.DistanceMatrixTask;
 import com.anshumantripathi.campusmapapp.util.LocationContext;
 import com.anshumantripathi.campusmapapp.R;
 import com.anshumantripathi.campusmapapp.util.TravelMode;
-
 import java.util.ArrayList;
-
-import static android.R.attr.onClick;
 import static com.anshumantripathi.campusmapapp.model.CampusData.initCampusBoundaries;
 
 public class MainActivity extends AppCompatActivity {
@@ -91,20 +87,19 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case MotionEvent.ACTION_UP:
                         ctx.setMode(TravelMode.BICYCLING.name());
+                        boolean isValidLocClicked = setDestinationLocationInContext(envX, envY);
+                        if(isValidLocClicked) {
+                            double src_lat = ctx.getCurrentLocation().getLat();
+                            double src_lng = ctx.getCurrentLocation().getLng();
+                            double des_lat = ctx.getDestinationLocation().getLat();
+                            double des_lng = ctx.getDestinationLocation().getLng();
 
-                        setDestinationLocationInContext(envX, envY);
-
-                        //TODO: Remove this.
-                        double src_lat = 37.368830;
-                        double src_lng = -122.036350;
-                        double des_lat = 37.338208;
-                        double des_lng = -121.886329;
-
-                        String stringURL = prepareDistanceMatrixURL(src_lat, src_lng, des_lat, des_lng, "bicycling");
-                        try {
-                            new DistanceMatrixTask(getApplicationContext()).execute(stringURL).get();
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                            String stringURL = prepareDistanceMatrixURL(src_lat, src_lng, des_lat, des_lng, "bicycling");
+                            try {
+                                new DistanceMatrixTask(getApplicationContext()).execute(stringURL).get();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
                         break;
                 }
@@ -116,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                //dismiss soft keypad
                 InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
                 imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 
@@ -252,7 +248,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void setDestinationLocationInContext(int envX, int envY) {
+    private boolean setDestinationLocationInContext(int envX, int envY) {
         int color = getHotspotColor(R.id.imageOverlay, envX, envY);
         int selectedColor=-1;
         Log.v("Color clicked:", Integer.toString(color));
@@ -292,9 +288,13 @@ public class MainActivity extends AppCompatActivity {
 
         }
         if(selectedColor == -1) {
+            Log.v("INVALID:","No Valid building has been touched.");
+            return false;
         }
-        else
+        else {
             setDestinationBuildingDetails(selectedColor);
+            return true;
+        }
     }
 
     /*Based on the color clicked, it fills in the building details in the context*/
@@ -316,7 +316,7 @@ public class MainActivity extends AppCompatActivity {
     private String prepareDistanceMatrixURL(double src_lat, double src_long, double des_lat, double des_long, String mode) {
         String stringURL = "";
         try {
-            stringURL += "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" +
+            stringURL += "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=" +
                     Double.toString(src_lat) +
                     "," +
                     Double.toString(src_long) +
