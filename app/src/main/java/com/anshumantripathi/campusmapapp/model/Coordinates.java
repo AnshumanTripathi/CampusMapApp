@@ -24,5 +24,10 @@ public class Coordinates {
     public void setLng(double lng) {
         this.lng = lng;
     }
+
+    @Override
+    public String toString() {
+        return "("+lat+","+lng+")";
+    }
 }
 
