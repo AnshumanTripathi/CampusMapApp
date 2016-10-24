@@ -8,74 +8,11 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="450dp"
         android:id="@+id/imageOverlay"
         android:scaleType="fitCenter"
         android:visibility="invisible"
         android:src="@drawable/image_overlay"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="From"
-            android:layout_gravity="bottom"
-            android:textSize="25sp" />
-        <EditText
-            android:id="@+id/from"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="25sp"
-            android:layout_gravity="bottom"
-            android:background="@color/white"
-            android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="To"
-                android:layout_gravity="bottom"
-                android:textSize="25sp" />
-            <EditText
-                android:id="@+id/to"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="25sp"
-                android:layout_gravity="bottom"
-                android:background="@color/white"
-                android:textStyle="bold"
-                android:layout_marginStart="30dp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_gravity="end"
-            android:orientation="horizontal">
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Clear"/>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="See in Maps"/>
-        </LinearLayout>
-    </LinearLayout>
 
     <Button
         android:text="Get Location"
@@ -85,9 +22,33 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="450dp"
         android:id="@+id/campusImage"
         android:src="@drawable/campus_image"
         android:scaleType="fitCenter"/>
+
+    <EditText
+        android:layout_width="182dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:layout_marginTop="460dp"
+        android:ems="10"
+        android:id="@+id/searchbar" />
+
+    <Button
+        android:text="Search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="460dp"
+        android:layout_marginLeft="190dp"
+        android:id="@+id/searchbutton" />
+
+    <Button
+        android:text="Clear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="460dp"
+        android:layout_marginLeft="280dp"
+        android:id="@+id/clear" />
 
 </FrameLayout>

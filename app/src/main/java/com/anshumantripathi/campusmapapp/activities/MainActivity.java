@@ -2,6 +2,7 @@ package com.anshumantripathi.campusmapapp.activities;
 
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,7 +11,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -22,7 +22,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -36,25 +38,36 @@ import com.anshumantripathi.campusmapapp.util.LocationContext;
 import com.anshumantripathi.campusmapapp.R;
 import com.anshumantripathi.campusmapapp.util.TravelMode;
 
-import org.json.JSONObject;
+import java.util.ArrayList;
 
+import static android.R.attr.onClick;
 import static com.anshumantripathi.campusmapapp.model.CampusData.initCampusBoundaries;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final int ACCESS_COARSE_LOCATION = 1;
     LocationContext ctx = LocationContext.getInstance();
-//    Button locationBtn;
-
+    EditText searchbar;
+    Button searchbutton;
+    Button clear;
+    CampusData cd = new CampusData();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        searchbar = (EditText) findViewById(R.id.searchbar);
+        searchbutton = (Button) findViewById(R.id.searchbutton);
+        clear = (Button) findViewById(R.id.clear);
+
         initCampusBoundaries();
+
         final ImageView campusImage = (ImageView) findViewById(R.id.campusImage);
+
         LocationContext.getInstance().resetContext();
         getCurrentLocation();
+
         campusImage.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -69,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
                         ImageView iv = new ImageView(getApplicationContext());
                         lp.setMargins(envX, envY, 0, 0);
                         iv.setLayoutParams(lp);
-//                        iv.setImageDrawable(getResources().getDrawable(R.drawable.pin));
                         Canvas canvas = new Canvas();
                         Bitmap pin = BitmapFactory.decodeResource(getResources(), R.drawable.pin);
                         canvas.drawBitmap(pin, envX, envY, null);
@@ -98,15 +110,28 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        locationBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
+        searchbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+
+                String searchQuery = searchbar.getText().toString();
+                ArrayList<String> op = searchBuilding(searchQuery);
+                for (int id = 0; id < op.size(); id++) {
+                    Log.v("Search Output:", op.get(id).toString());
+                }
+            }
+        });
+
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchbar.getText().clear();
+            }
+        });
     }
-
 
     public int getHotspotColor(int hotspotId, int x, int y) {
         ImageView img = (ImageView) findViewById(hotspotId);
@@ -158,12 +183,12 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             };
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0, locationListener);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
             currentLocation.setLat(locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLatitude());
             currentLocation.setLng(locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLongitude());
             ctx.setCurrentLocation(currentLocation);
             System.out.println(ctx.getCurrentLocation().toString());
-            Toast.makeText(MainActivity.this,ctx.getCurrentLocation().toString(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, ctx.getCurrentLocation().toString(), Toast.LENGTH_SHORT).show();
         } catch (SecurityException permissionException) {
             Toast.makeText(getBaseContext(), "Location permission might be missing. Check GPS", Toast.LENGTH_SHORT).show();
             displayGpsStatus();
@@ -212,13 +237,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void setDestinationLocationInContext(int envX, int envY) {
         int color = getHotspotColor(R.id.imageOverlay, envX, envY);
-        int selectedColor=-1;
+        int selectedColor = -1;
         Log.v("Color clicked:", Integer.toString(color));
 
-        if(closeMatch(Color.WHITE,color,Constants.TOLERANCE)){
-            Toast.makeText(MainActivity.this,"Empty",Toast.LENGTH_SHORT).show();
-        }else
-        if (closeMatch(Color.YELLOW, color, Constants.TOLERANCE)) {
+        if (closeMatch(Color.WHITE, color, Constants.TOLERANCE)) {
+            Toast.makeText(MainActivity.this, "Empty", Toast.LENGTH_SHORT).show();
+        } else if (closeMatch(Color.YELLOW, color, Constants.TOLERANCE)) {
             Toast.makeText(MainActivity.this, "Library", Toast.LENGTH_SHORT).show();
             LocationContext.getInstance().setColor(0);
             selectedColor = 0;
@@ -249,9 +273,8 @@ public class MainActivity extends AppCompatActivity {
             selectedColor = 5;
 
         }
-        if(selectedColor == -1) {
-        }
-        else
+        if (selectedColor == -1) {
+        } else
             setDestinationBuildingDetails(selectedColor);
     }
 
@@ -259,7 +282,6 @@ public class MainActivity extends AppCompatActivity {
     private void setDestinationBuildingDetails(int color) {
 
         Log.v("Color:", Integer.toString(color));
-        CampusData cd = new CampusData();
         BuildingData buil = cd.getBuildingData().get(color);
 
         Coordinates destC = new Coordinates();
@@ -289,6 +311,20 @@ public class MainActivity extends AppCompatActivity {
             ex.printStackTrace();
         }
         return null;
+    }
+
+    public ArrayList<String> searchBuilding(String searchQuery) {
+        Log.v("Search Query:", searchQuery);
+        ArrayList<String> op = new ArrayList<>();
+        for (int id = 0; id < Constants.BUILD_COUNT; id++) {
+            String buildingName = CampusData.buildingData.get(id).getName().toLowerCase();
+            Log.v("CHecking Building:", buildingName);
+            if (buildingName.contains(searchQuery) == true) {
+                Log.v("MATCHES:", buildingName);
+                op.add(buildingName);
+            }
+        }
+        return op;
     }
 
 }
