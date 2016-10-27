@@ -39,7 +39,7 @@ public class CampusData {
         bd_2.setLng(-121.881276);
         bd_2.setBimage(R.drawable.eng_building);
         buildingData.add(bd_2);
-
+        
         BuildingData bd_3 = new BuildingData();
         bd_3 = new BuildingData();
         bd_3.setName("Yoshihiro Uchida Hall");

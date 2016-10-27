@@ -14,6 +14,10 @@ public class BuildingData {
     private double lat;
     private double lng;
     private String address;
+    private int xPixel;
+    private int yPixel;
+
+
 
 
     public BuildingData(){
@@ -58,5 +62,21 @@ public class BuildingData {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public int getxPixel() {
+        return xPixel;
+    }
+
+    public void setxPixel(int xPixel) {
+        this.xPixel = xPixel;
+    }
+
+    public int getyPixel() {
+        return yPixel;
+    }
+
+    public void setyPixel(int yPixel) {
+        this.yPixel = yPixel;
     }
 }
