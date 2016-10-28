@@ -49,4 +49,18 @@ Temporary Items
 .gradle
 *.iml
 .bin
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+/.idea/gradle.xml
+.idea/vcs.xml
+.idea/~$vcs.xml
+.idea
+*.bin
+*.lock
+
 
