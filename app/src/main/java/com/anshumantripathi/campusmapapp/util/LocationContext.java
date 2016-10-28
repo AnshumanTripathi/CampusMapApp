@@ -6,8 +6,8 @@ import android.graphics.Bitmap;
 import com.anshumantripathi.campusmapapp.model.BuildingData;
 import com.anshumantripathi.campusmapapp.model.Coordinates;
 
+// This class contains the context of the current app.
 public class LocationContext extends Activity {
-
 
     private static LocationContext instance;
 
@@ -15,18 +15,26 @@ public class LocationContext extends Activity {
         LocationContext.instance = instance;
     }
 
-    private static Coordinates currentLocation;
-    //this is a redundant param, we can plan to remove it.
-    private static Coordinates destinationLocation;
-    private static String mode;
+    //************** data about search operation **************
+
+    //********** data about building and transit detail (when someone clicks on a building) *******
     private static String distance;
-    private static String time;
-    private static int color;
     private static BuildingData buildData;
-    private static String distanceMatrixResp;
+    private static String mode;
+    private static String time;
+
+    //********** detail about the panaromic view *********************
     private static Bitmap streetViewImg;
     private static long xPixel;
     private static long yPixel;
+
+    //********** detail about the current user *****************
+    private static Coordinates currentLocation;
+    //this is a redundant param, we can plan to remove it.
+    private static Coordinates destinationLocation;
+
+    private static int color;
+    private static String distanceMatrixResp;
 
     private LocationContext() {
     }

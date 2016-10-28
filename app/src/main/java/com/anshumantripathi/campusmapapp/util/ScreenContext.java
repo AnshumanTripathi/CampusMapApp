@@ -48,8 +48,8 @@ public class ScreenContext extends Activity{
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         screenHeight = metrics.heightPixels;
         screenWidth = metrics.widthPixels;
-        CampusData.initCampusBoundaries();
         CampusData campusData = new CampusData();
+        campusData.initCampusBoundaries();
         campusData.getPoint1().getLat();
     }
 

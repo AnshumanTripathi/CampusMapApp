@@ -5,12 +5,12 @@ import com.anshumantripathi.campusmapapp.R;
 import java.util.ArrayList;
 public class CampusData {
 
-    private static Coordinates point1;
-    private static Coordinates point2;
-    private static Coordinates point3;
-    private static Coordinates point4;
-    public static ArrayList<BuildingData> buildingData;
-    public static ArrayList<String> buildingName;
+    private Coordinates point1;
+    private Coordinates point2;
+    private Coordinates point3;
+    private Coordinates point4;
+    public ArrayList<BuildingData> buildingData;
+    public ArrayList<String> buildingName;
 
     public ArrayList<BuildingData> getBuildingData() {
         return buildingData;
@@ -123,7 +123,7 @@ public class CampusData {
         point4 = userPoint4;
     }
 
-    public static void initCampusBoundaries() {
+    public void initCampusBoundaries() {
 
         //4th and San Fernando
         point1 = new Coordinates();

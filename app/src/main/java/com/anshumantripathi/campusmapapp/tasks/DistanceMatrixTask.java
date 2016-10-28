@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.anshumantripathi.campusmapapp.activities.BuildingDetailActivity;
+import com.anshumantripathi.campusmapapp.activities.MainActivity;
 import com.anshumantripathi.campusmapapp.util.LocationContext;
 
 import org.json.JSONObject;
@@ -58,12 +59,10 @@ public class DistanceMatrixTask extends AsyncTask<String, Void, String> {
         super.onPostExecute(s);
         LocationContext.getInstance().setDistanceMatrixResp(server_response);
         parseDistanceMatrix(LocationContext.getInstance().getDistanceMatrixResp());
-
-        Intent in = new Intent(context, BuildingDetailActivity.class);
+        Intent in = new Intent(this.context, BuildingDetailActivity.class);
         in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(in);
     }
-
 
     /*This method will parse the response received from the Google API - DistanceMatrix
     * It also finds out the distance and time from the response and set it in Context*/
