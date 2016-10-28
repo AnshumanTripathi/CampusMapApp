@@ -8,6 +8,7 @@ import static android.R.attr.bitmap;
  * Created by AnshumanTripathi on 10/18/16.
  */
 
+// store the building details here only. This building detail is the one which user has clicked on.
 public class BuildingData {
     private String name;
     private int bimage;
@@ -16,7 +17,6 @@ public class BuildingData {
     private String address;
     private int xPixel;
     private int yPixel;
-
 
     private double heading;
     private String streetAddress;
