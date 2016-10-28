@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout"
+=======
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+>>>>>>> 990628c42d15ee38dd480c408e70131b93c01c6f
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.anshumantripathi.campusmapapp.activities.MainActivity">
 
     <ImageView
+<<<<<<< HEAD
         android:id="@+id/imageOverlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -49,4 +55,50 @@
             android:layout_height="wrap_content"
             android:text="Clear" />
     </LinearLayout>
+=======
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:id="@+id/imageOverlay"
+        android:scaleType="fitCenter"
+        android:visibility="invisible"
+        android:src="@drawable/image_overlay"/>
+
+    <Button
+        android:text="Get Location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/location" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:id="@+id/campusImage"
+        android:src="@drawable/campus_image"
+        android:scaleType="fitCenter"/>
+
+    <EditText
+        android:layout_width="182dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:layout_marginTop="460dp"
+        android:ems="10"
+        android:id="@+id/searchbar" />
+
+    <Button
+        android:text="Search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="460dp"
+        android:layout_marginLeft="190dp"
+        android:id="@+id/searchbutton" />
+
+    <Button
+        android:text="Clear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="460dp"
+        android:layout_marginLeft="280dp"
+        android:id="@+id/clear" />
+
+>>>>>>> 990628c42d15ee38dd480c408e70131b93c01c6f
 </FrameLayout>

@@ -25,6 +25,7 @@ public class LocationContext extends Activity {
     private static BuildingData buildData;
     private static String distanceMatrixResp;
     private static Bitmap streetViewImg;
+<<<<<<< HEAD
     private static long xPixel;
     private static long yPixel;
 
@@ -46,6 +47,8 @@ public class LocationContext extends Activity {
     public void setyPixel(long newyPixel) {
         yPixel = newyPixel;
     }
+=======
+>>>>>>> 990628c42d15ee38dd480c408e70131b93c01c6f
 
     public Bitmap getStreetViewImg() {
         return streetViewImg;

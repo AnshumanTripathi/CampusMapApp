@@ -14,11 +14,32 @@ public class BuildingData {
     private double lat;
     private double lng;
     private String address;
+<<<<<<< HEAD
     private int xPixel;
     private int yPixel;
 
 
 
+=======
+    private double heading;
+    private String streetAddress;
+
+    public String getStreetAddress() {
+        return streetAddress;
+    }
+
+    public void setStreetAddress(String streetAddress) {
+        this.streetAddress = streetAddress;
+    }
+
+    public double getHeading() {
+        return heading;
+    }
+
+    public void setHeading(double heading) {
+        this.heading = heading;
+    }
+>>>>>>> 990628c42d15ee38dd480c408e70131b93c01c6f
 
     public BuildingData(){
 
@@ -63,6 +84,7 @@ public class BuildingData {
     public void setAddress(String address) {
         this.address = address;
     }
+<<<<<<< HEAD
 
     public int getxPixel() {
         return xPixel;
@@ -79,4 +101,6 @@ public class BuildingData {
     public void setyPixel(int yPixel) {
         this.yPixel = yPixel;
     }
+=======
+>>>>>>> 990628c42d15ee38dd480c408e70131b93c01c6f
 }
