@@ -46,12 +46,6 @@ public class BuildingDetailActivity extends Activity {
         streetView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String address = LocationContext.getInstance().getBuildData().getAddress();
-                try {
-                    new StreetViewTask().execute(prepareStreetViewURL(Constants.STREETV_X, Constants.STREETV_Y, address)).get();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
                 Intent in = new Intent(getApplicationContext(), StreetViewActivity.class);
                 startActivity(in);
             }

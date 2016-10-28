@@ -2,61 +2,52 @@ package com.anshumantripathi.campusmapapp.activities;
 
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.anshumantripathi.campusmapapp.R;
 import com.anshumantripathi.campusmapapp.activities.Handlers.BuildingClickHandler;
 import com.anshumantripathi.campusmapapp.activities.Handlers.GenericToastManager;
-import com.anshumantripathi.campusmapapp.activities.Handlers.SearchButtonClickHandler;
 import com.anshumantripathi.campusmapapp.activities.Handlers.UserLocationChangeHandler;
-import com.anshumantripathi.campusmapapp.model.BuildingData;
 import com.anshumantripathi.campusmapapp.model.CampusData;
 import com.anshumantripathi.campusmapapp.model.Coordinates;
-import com.anshumantripathi.campusmapapp.model.Constants;
+import com.anshumantripathi.campusmapapp.model.RedDot;
 import com.anshumantripathi.campusmapapp.util.LocationContext;
-import com.anshumantripathi.campusmapapp.model.Pin;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final int ACCESS_COARSE_LOCATION = 1;
     LocationContext ctx = LocationContext.getInstance();
     EditText searchbar;
-    Button searchbutton;
-    Button clear;
+    ImageButton searchbutton;
+    ImageButton clear;
+    FloatingActionButton fab;
     CampusData cd = new CampusData();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         // init model data
         LocationContext currAppContext = LocationContext.getInstance();
         currAppContext.resetContext();
@@ -69,9 +60,15 @@ public class MainActivity extends AppCompatActivity {
 
         // ************ initialize the UI elements on screen ********************
         searchbar = (EditText) findViewById(R.id.searchbar);
-        searchbutton = (Button) findViewById(R.id.searchbutton);
-        clear = (Button) findViewById(R.id.clear);
+        searchbutton = (ImageButton) findViewById(R.id.search_button);
+        clear = (ImageButton) findViewById(R.id.clear);
+        fab = (FloatingActionButton) findViewById(R.id.location_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
         final ImageView campusImage = (ImageView) findViewById(R.id.campusImage);
 
         // ******************** Test code **************************
@@ -101,17 +98,17 @@ public class MainActivity extends AppCompatActivity {
 
         ctx.setxPixel(screenWidth / 2);
         ctx.setyPixel(screenHeight / 2);
-        Pin pin = new Pin(MainActivity.this);
+        RedDot locatoinDot = new RedDot(MainActivity.this);
         FrameLayout fLayout = (FrameLayout) findViewById(R.id.frameLayout);
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-        fLayout.addView(pin, params);
+        fLayout.addView(locatoinDot, params);
         // *********************************************************
 
         campusImage.setOnTouchListener(new BuildingClickHandler(this, currAppContext));
 
-        searchbutton.setOnClickListener(new SearchButtonClickHandler());
+//        searchbutton.setOnClickListener(new SearchButtonClickHandler());
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -247,18 +244,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public ArrayList<String> searchBuilding(String searchQuery) {
-        Log.v("Search Query:", searchQuery);
-        ArrayList<String> op = new ArrayList<>();
-        for (int id = 0; id < Constants.BUILD_COUNT; id++) {
-            String buildingName = cd.buildingData.get(id).getName().toLowerCase();
-            Log.v("CHecking Building:", buildingName);
-            if (buildingName.contains(searchQuery) == true) {
-                Log.v("MATCHES:", buildingName);
-                op.add(buildingName);
-            }
-        }
-        return op;
+
+    public EditText getSearchbar(){
+        return this.searchbar;
     }
 
 }

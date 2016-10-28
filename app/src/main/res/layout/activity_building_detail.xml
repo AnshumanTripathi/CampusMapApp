@@ -57,7 +57,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/pin"
+        android:src="@drawable/pin"
         android:layout_below="@+id/distance"
         android:layout_toStartOf="@+id/streetview"
         android:layout_marginEnd="16dp"

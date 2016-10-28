@@ -1,9 +1,5 @@
 package com.anshumantripathi.campusmapapp.model;
 
-import android.graphics.Bitmap;
-
-import static android.R.attr.bitmap;
-
 /**
  * Created by AnshumanTripathi on 10/18/16.
  */
@@ -17,24 +13,15 @@ public class BuildingData {
     private String address;
     private int xPixel;
     private int yPixel;
+    private Coordinates streetViewCoord;
 
-    private double heading;
-    private String streetAddress;
 
-    public String getStreetAddress() {
-        return streetAddress;
+    public Coordinates getStreetViewCoord() {
+        return streetViewCoord;
     }
 
-    public void setStreetAddress(String streetAddress) {
-        this.streetAddress = streetAddress;
-    }
-
-    public double getHeading() {
-        return heading;
-    }
-
-    public void setHeading(double heading) {
-        this.heading = heading;
+    public void setStreetViewCoord(Coordinates streetViewCoord) {
+        this.streetViewCoord = streetViewCoord;
     }
 
     public BuildingData(){
