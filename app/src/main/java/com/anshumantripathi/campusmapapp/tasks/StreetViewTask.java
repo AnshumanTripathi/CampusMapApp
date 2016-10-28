@@ -1,4 +1,4 @@
-package com.anshumantripathi.campusmapapp.util;
+package com.anshumantripathi.campusmapapp.tasks;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.ImageView;
 
 import com.anshumantripathi.campusmapapp.R;
+import com.anshumantripathi.campusmapapp.util.LocationContext;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;

@@ -10,10 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.anshumantripathi.campusmapapp.R;
-import com.anshumantripathi.campusmapapp.util.Constants;
-import com.anshumantripathi.campusmapapp.util.DistanceMatrixTask;
+import com.anshumantripathi.campusmapapp.model.Constants;
+import com.anshumantripathi.campusmapapp.tasks.StreetViewTask;
 import com.anshumantripathi.campusmapapp.util.LocationContext;
-import com.anshumantripathi.campusmapapp.util.StreetViewTask;
+
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

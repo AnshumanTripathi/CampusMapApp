@@ -1,4 +1,4 @@
-package com.anshumantripathi.campusmapapp.util;
+package com.anshumantripathi.campusmapapp.tasks;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.anshumantripathi.campusmapapp.activities.BuildingDetailActivity;
+import com.anshumantripathi.campusmapapp.util.LocationContext;
 
 import org.json.JSONObject;
 

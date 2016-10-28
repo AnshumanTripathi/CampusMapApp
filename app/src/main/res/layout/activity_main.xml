@@ -1,54 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
+    android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.anshumantripathi.campusmapapp.activities.MainActivity">
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="450dp"
         android:id="@+id/imageOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:scaleType="fitCenter"
-        android:visibility="invisible"
-        android:src="@drawable/image_overlay"/>
+        android:src="@drawable/image_overlay"
+        android:visibility="invisible" />
 
-    <Button
-        android:text="Get Location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/location" />
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="450dp"
         android:id="@+id/campusImage"
-        android:src="@drawable/campus_image"
-        android:scaleType="fitCenter"/>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/campus_image" />
 
-    <EditText
-        android:layout_width="182dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:layout_marginTop="460dp"
-        android:ems="10"
-        android:id="@+id/searchbar" />
+        android:layout_gravity="bottom|end"
+        android:orientation="horizontal"
+        android:padding="10dp">
 
-    <Button
-        android:text="Search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="460dp"
-        android:layout_marginLeft="190dp"
-        android:id="@+id/searchbutton" />
+        <EditText
+            android:id="@+id/searchbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName" />
 
-    <Button
-        android:text="Clear"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="460dp"
-        android:layout_marginLeft="280dp"
-        android:id="@+id/clear" />
+        <Button
+            android:id="@+id/searchbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search" />
 
+        <Button
+            android:id="@+id/clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Clear" />
+    </LinearLayout>
 </FrameLayout>

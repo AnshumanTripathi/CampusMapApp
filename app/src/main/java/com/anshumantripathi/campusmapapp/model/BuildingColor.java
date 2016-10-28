@@ -1,4 +1,4 @@
-package com.anshumantripathi.campusmapapp.util;
+package com.anshumantripathi.campusmapapp.model;
 
 /**
  * Created by Somya on 10/19/2016.

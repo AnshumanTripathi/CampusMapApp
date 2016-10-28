@@ -25,6 +25,7 @@ public class Coordinates {
         this.lng = lng;
     }
 
+
     @Override
     public String toString() {
         return "(" + lat + "," + lng + ")";
