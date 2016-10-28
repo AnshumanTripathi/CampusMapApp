@@ -25,10 +25,6 @@ public class Coordinates {
         this.lng = lng;
     }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 990628c42d15ee38dd480c408e70131b93c01c6f
     @Override
     public String toString() {
         return "(" + lat + "," + lng + ")";

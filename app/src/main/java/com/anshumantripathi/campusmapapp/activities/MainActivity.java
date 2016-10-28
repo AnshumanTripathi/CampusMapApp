@@ -8,11 +8,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-<<<<<<< HEAD
-=======
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
->>>>>>> 990628c42d15ee38dd480c408e70131b93c01c6f
 import android.graphics.Color;
 import android.location.Criteria;
 import android.location.Location;
@@ -23,7 +18,6 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-<<<<<<< HEAD
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -51,27 +45,6 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 
-=======
-import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
-
-import com.anshumantripathi.campusmapapp.model.BuildingData;
-import com.anshumantripathi.campusmapapp.model.CampusData;
-import com.anshumantripathi.campusmapapp.model.Coordinates;
-import com.anshumantripathi.campusmapapp.util.Constants;
-import com.anshumantripathi.campusmapapp.util.DistanceMatrixTask;
-import com.anshumantripathi.campusmapapp.util.LocationContext;
-import com.anshumantripathi.campusmapapp.R;
-import com.anshumantripathi.campusmapapp.util.TravelMode;
-import java.util.ArrayList;
->>>>>>> 990628c42d15ee38dd480c408e70131b93c01c6f
 import static com.anshumantripathi.campusmapapp.model.CampusData.initCampusBoundaries;
 
 public class MainActivity extends AppCompatActivity {
@@ -94,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
 
         initCampusBoundaries();
 
-<<<<<<< HEAD
 
         final ImageView campusImage = (ImageView) findViewById(R.id.campusImage);
 
@@ -130,13 +102,6 @@ public class MainActivity extends AppCompatActivity {
         fLayout.addView(pin, params);
         LocationContext.getInstance().resetContext();
         getCurrentLocation();
-=======
-        final ImageView campusImage = (ImageView) findViewById(R.id.campusImage);
-
-        LocationContext.getInstance().resetContext();
-        getCurrentLocation();
-
->>>>>>> 990628c42d15ee38dd480c408e70131b93c01c6f
         campusImage.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -146,7 +111,6 @@ public class MainActivity extends AppCompatActivity {
                 ImageView imageView = (ImageView) v.findViewById(R.id.campusImage);
 
                 switch (action) {
-<<<<<<< HEAD
                     case MotionEvent.ACTION_UP:
 
                         ctx.setMode(TravelMode.BICYCLING.name());
@@ -167,33 +131,6 @@ public class MainActivity extends AppCompatActivity {
                         } catch (NullPointerException npe) {
                             Toast.makeText(MainActivity.this, "Some Error Occured while getting Location. Check GPS", Toast.LENGTH_SHORT).show();
                             npe.printStackTrace();
-=======
-                    case MotionEvent.ACTION_DOWN:
-                        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                        ImageView iv = new ImageView(getApplicationContext());
-                        lp.setMargins(envX, envY, 0, 0);
-                        iv.setLayoutParams(lp);
-                        Canvas canvas = new Canvas();
-                        Bitmap pin = BitmapFactory.decodeResource(getResources(), R.drawable.pin);
-                        canvas.drawBitmap(pin, envX, envY, null);
-                        v.draw(canvas);
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        ctx.setMode(TravelMode.BICYCLING.name());
-                        boolean isValidLocClicked = setDestinationLocationInContext(envX, envY);
-                        if(isValidLocClicked) {
-                            double src_lat = ctx.getCurrentLocation().getLat();
-                            double src_lng = ctx.getCurrentLocation().getLng();
-                            double des_lat = ctx.getDestinationLocation().getLat();
-                            double des_lng = ctx.getDestinationLocation().getLng();
-
-                            String stringURL = prepareDistanceMatrixURL(src_lat, src_lng, des_lat, des_lng, "bicycling");
-                            try {
-                                new DistanceMatrixTask(getApplicationContext()).execute(stringURL).get();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
->>>>>>> 990628c42d15ee38dd480c408e70131b93c01c6f
                         }
                         break;
                 }
@@ -211,17 +148,11 @@ public class MainActivity extends AppCompatActivity {
 
                 String searchQuery = searchbar.getText().toString();
                 ArrayList<String> op = searchBuilding(searchQuery);
-<<<<<<< HEAD
                 ArrayList<BuildingData> buildingData = new CampusData().getBuildingData();
                 for(String searchResult : op){
-                    
+
                 }
 
-=======
-                for (int id = 0; id < op.size(); id++) {
-                    Log.v("Search Output:", op.get(id).toString());
-                }
->>>>>>> 990628c42d15ee38dd480c408e70131b93c01c6f
             }
         });
         clear.setOnClickListener(new View.OnClickListener() {
@@ -261,16 +192,12 @@ public class MainActivity extends AppCompatActivity {
         LocationManager locationManager = (LocationManager) MainActivity.this.getSystemService(LOCATION_SERVICE);
         boolean isGpsOn = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         boolean isNetworkOn = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-<<<<<<< HEAD
 //        boolean isProvider = locationManager.isProviderEnabled(LocationManager.PASSIVE_PROVIDER);
-=======
->>>>>>> 990628c42d15ee38dd480c408e70131b93c01c6f
         try {
             final Coordinates currentLocation = new Coordinates();
             LocationListener locationListener = new LocationListener() {
                 @Override
                 public void onLocationChanged(Location location) {
-<<<<<<< HEAD
 //                    try {
 //                        System.out.print("CurrentLocation: " + location.toString());
 //                        currentLocation.setLat(locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLatitude());
@@ -279,8 +206,6 @@ public class MainActivity extends AppCompatActivity {
 //                    }catch (SecurityException e){
 //                        System.out.println("Security Exception Occured!");
 //                    }
-=======
->>>>>>> 990628c42d15ee38dd480c408e70131b93c01c6f
                 }
 
                 @Override
@@ -298,11 +223,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             };
-<<<<<<< HEAD
             if (isGpsOn) {
-=======
-            if (isGpsOn && isNetworkOn && locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER) != null) {
->>>>>>> 990628c42d15ee38dd480c408e70131b93c01c6f
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
                 currentLocation.setLat(locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLatitude());
                 currentLocation.setLng(locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLongitude());
@@ -371,22 +292,12 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean setDestinationLocationInContext(int envX, int envY) {
         int color = getHotspotColor(R.id.imageOverlay, envX, envY);
-<<<<<<< HEAD
         int selectedColor = -1;
         Log.v("Color clicked:", Integer.toString(color));
 
         if (closeMatch(Color.WHITE, color, Constants.TOLERANCE)) {
             Toast.makeText(MainActivity.this, "Empty", Toast.LENGTH_SHORT).show();
         } else if (closeMatch(Color.YELLOW, color, Constants.TOLERANCE)) {
-=======
-        int selectedColor=-1;
-        Log.v("Color clicked:", Integer.toString(color));
-
-        if(closeMatch(Color.WHITE,color,Constants.TOLERANCE)){
-            Toast.makeText(MainActivity.this,"Empty",Toast.LENGTH_SHORT).show();
-        }else
-        if (closeMatch(Color.YELLOW, color, Constants.TOLERANCE)) {
->>>>>>> 990628c42d15ee38dd480c408e70131b93c01c6f
             Toast.makeText(MainActivity.this, "Library", Toast.LENGTH_SHORT).show();
             LocationContext.getInstance().setColor(0);
             selectedColor = 0;
@@ -417,18 +328,10 @@ public class MainActivity extends AppCompatActivity {
             selectedColor = 5;
 
         }
-<<<<<<< HEAD
         if (selectedColor == -1) {
             Log.v("INVALID:", "No Valid building has been touched.");
             return false;
         } else {
-=======
-        if(selectedColor == -1) {
-            Log.v("INVALID:","No Valid building has been touched.");
-            return false;
-        }
-        else {
->>>>>>> 990628c42d15ee38dd480c408e70131b93c01c6f
             setDestinationBuildingDetails(selectedColor);
             return true;
         }
