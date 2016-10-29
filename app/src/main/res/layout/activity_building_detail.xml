@@ -1,66 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.anshumantripathi.campusmapapp.activities.BuildingDetailActivity">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Street View"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:id="@+id/image_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2">
+
+            <ImageView
+                android:id="@+id/bimage"
+                android:layout_width="match_parent"
+                android:layout_height="288dp"
+                android:src="@drawable/ychall" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal"
+                android:padding="20dp">
+
+                <ImageView
+                    android:layout_width="74dp"
+                    android:layout_height="60dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/building_location" />
+
+                <TextView
+                    android:id="@+id/baddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Building Address"
+                    android:textAppearance="@android:style/TextAppearance.Material" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="20dp"
+                android:weightSum="1">
+
+                <ImageView
+                    android:layout_width="52dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="0.09"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/navigate_icon" />
+
+                <TextView
+                    android:id="@+id/distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="distance"
+                    android:textAppearance="@android:style/TextAppearance.Material" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="20dp"
+                android:layout_marginLeft="10dp"
+                android:weightSum="1">
+
+                <ImageView
+                    android:layout_width="52dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="0.09"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/time_icon" />
+
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="20dp"
+                    android:text="time"
+                    android:textAppearance="@android:style/TextAppearance.Material" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/streetview"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="151dp" />
-
-    <TextView
-        android:text="BuildingName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="57dp"
-        android:id="@+id/bname"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:text="Building Address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/bname"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="18dp"
-        android:id="@+id/baddress" />
-
-    <TextView
-        android:text="distance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/streetview"
-        android:layout_alignStart="@+id/bname"
-        android:layout_marginTop="73dp"
-        android:id="@+id/distance" />
-
-    <TextView
-        android:text="time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/time"
-        android:layout_centerVertical="true"
-        android:layout_alignEnd="@+id/distance" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/pin"
-        android:layout_below="@+id/distance"
-        android:layout_toStartOf="@+id/streetview"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="55dp"
-        android:id="@+id/bimage" />
-</RelativeLayout>
+        android:clickable="true"
+        android:src="@drawable/street_view"
+        app:backgroundTint="@android:color/darker_gray"
+        app:layout_anchor="@+id/image_layout"
+        app:layout_anchorGravity="bottom|right"
+        android:layout_marginEnd="20dp"/>
+</android.support.design.widget.CoordinatorLayout>

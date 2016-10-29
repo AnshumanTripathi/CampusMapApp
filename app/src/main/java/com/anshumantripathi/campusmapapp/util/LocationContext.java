@@ -17,6 +17,7 @@ public class LocationContext extends Activity {
 
     //************** data about search operation **************
 
+
     //********** data about building and transit detail (when someone clicks on a building) *******
     private static String distance;
     private static BuildingData buildData;

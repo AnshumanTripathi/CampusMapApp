@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
 
         campusImage.setOnTouchListener(new BuildingClickHandler(this, currAppContext));
 
-//        searchbutton.setOnClickListener(new SearchButtonClickHandler());
+        searchbutton.setOnClickListener(new SearchButtonClickHandler(this));
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
