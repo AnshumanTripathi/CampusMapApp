@@ -144,6 +144,10 @@ public class LocationContext extends Activity {
         distance = null;
         time = null;
         buildData = new BuildingData();
+        destinationLocation = null;
+        currentLocation = null;
+        color = 0;
+        distanceMatrixResp = "";
     }
 
     public Coordinates getCurrentLocation() {

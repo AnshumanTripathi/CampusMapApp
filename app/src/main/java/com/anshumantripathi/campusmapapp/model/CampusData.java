@@ -67,8 +67,8 @@ public class CampusData {
         BuildingData bd_4 = new BuildingData();
         bd_4.setName("Student Union");
         bd_4.setAddress("Student Union Building, San Jose, CA 95112");
-        bd_4.setLat(37.424197);
-        bd_4.setLng(-122.170939);
+        bd_4.setLat(37.336450);
+        bd_4.setLng(-121.881265);
         bd_4.setStreetViewCoord(new Coordinates(37.337247,-121.882780));
         bd_4.setBimage(R.drawable.studentunion);
         bd_4.setxPixel(868);

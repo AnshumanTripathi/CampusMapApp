@@ -30,10 +30,7 @@ public class SearchButtonClickHandler implements android.widget.SearchView.OnQue
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        //dismiss soft keypad
-        InputMethodManager imm = (InputMethodManager) activity.getSystemService(
-                Activity.INPUT_METHOD_SERVICE);
-        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+       hideSoftKeypad();
         searchBuilding(query);
         ((MainActivity) activity).onBuildingDetailsFetch();
         return false;
@@ -44,6 +41,7 @@ public class SearchButtonClickHandler implements android.widget.SearchView.OnQue
         if(newText.equals("")) {
             ((MainActivity) activity).onSearchClear();
         }
+        hideSoftKeypad();
         return false;
     }
     //search for the buildings as per the search query passed.
@@ -66,5 +64,12 @@ public class SearchButtonClickHandler implements android.widget.SearchView.OnQue
             }
         }
         ctx.setSearchResult(op);
+    }
+
+    //dismiss soft keypad
+    public void hideSoftKeypad(){
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(
+                Activity.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
     }
 }
