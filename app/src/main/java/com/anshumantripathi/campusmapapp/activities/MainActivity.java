@@ -28,6 +28,7 @@ import android.widget.Toast;
 import com.anshumantripathi.campusmapapp.R;
 import com.anshumantripathi.campusmapapp.activities.Handlers.BuildingClickHandler;
 import com.anshumantripathi.campusmapapp.activities.Handlers.GenericToastManager;
+import com.anshumantripathi.campusmapapp.activities.Handlers.SearchButtonClickHandler;
 import com.anshumantripathi.campusmapapp.activities.Handlers.UserLocationChangeHandler;
 import com.anshumantripathi.campusmapapp.model.CampusData;
 import com.anshumantripathi.campusmapapp.model.Coordinates;
@@ -108,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
         campusImage.setOnTouchListener(new BuildingClickHandler(this, currAppContext));
 
-//        searchbutton.setOnClickListener(new SearchButtonClickHandler());
+        searchbutton.setOnClickListener(new SearchButtonClickHandler(this,cd, ctx));
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

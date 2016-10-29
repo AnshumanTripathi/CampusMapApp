@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import com.anshumantripathi.campusmapapp.model.BuildingData;
 import com.anshumantripathi.campusmapapp.model.Coordinates;
 
+import java.util.ArrayList;
+
 // This class contains the context of the current app.
 public class LocationContext extends Activity {
 
@@ -16,6 +18,7 @@ public class LocationContext extends Activity {
     }
 
     //************** data about search operation **************
+    ArrayList<BuildingData> searchResult = new ArrayList<>();
 
     //********** data about building and transit detail (when someone clicks on a building) *******
     private static String distance;
@@ -144,6 +147,14 @@ public class LocationContext extends Activity {
 
     public Coordinates getCurrentLocation() {
         return currentLocation;
+    }
+
+    public ArrayList<BuildingData> getSearchResult() {
+        return searchResult;
+    }
+
+    public void setSearchResult(ArrayList<BuildingData> searchResult) {
+        this.searchResult = searchResult;
     }
 
 }

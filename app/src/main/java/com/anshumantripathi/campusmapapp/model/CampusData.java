@@ -9,7 +9,7 @@ public class CampusData {
     private Coordinates point2;
     private Coordinates point3;
     private Coordinates point4;
-    public ArrayList<BuildingData> buildingData;
+    private ArrayList<BuildingData> buildingData;
     public ArrayList<String> buildingName;
 
     public ArrayList<BuildingData> getBuildingData() {
@@ -30,6 +30,7 @@ public class CampusData {
         bd_1.setLng(-121.884999);
         bd_1.setBimage(R.drawable.library);
         bd_1.setStreetViewCoord(new Coordinates(37.335785,-121.885790));
+        bd_1.setAbbr("king");
         buildingData.add(bd_1);
 
         BuildingData bd_2 = new BuildingData();
@@ -40,6 +41,7 @@ public class CampusData {
         bd_2.setLng(-121.881276);
         bd_2.setBimage(R.drawable.eng_building);
         bd_2.setStreetViewCoord(new Coordinates(37.337404,-121.882614));
+        bd_2.setAbbr("eng");
         buildingData.add(bd_2);
 
         BuildingData bd_3 = new BuildingData();
@@ -50,6 +52,7 @@ public class CampusData {
         bd_3.setLng(-121.883388);
         bd_3.setStreetViewCoord(new Coordinates(37.333362,-121.884132));
         bd_3.setBimage(R.drawable.ychall);
+        bd_3.setAbbr("yuh");
         buildingData.add(bd_3);
 
         BuildingData bd_4 = new BuildingData();
@@ -59,15 +62,17 @@ public class CampusData {
         bd_4.setLng(-122.170939);
         bd_4.setStreetViewCoord(new Coordinates(37.337247,-121.882780));
         bd_4.setBimage(R.drawable.studentunion);
+        bd_4.setAbbr("su");
         buildingData.add(bd_4);
 
         BuildingData bd_5 = new BuildingData();
-        bd_5.setName("BBC");
+        bd_5.setName("Boccardo Business Complex");
         bd_5.setAddress("Boccardo Business Complex, San Jose, CA 95112");
         bd_5.setLat(37.336561);
         bd_5.setLng(-121.878723);
         bd_5.setStreetViewCoord(new Coordinates(37.336855,-121.878296));
         bd_5.setBimage(R.drawable.bbc);
+        bd_5.setAbbr("bbc");
         buildingData.add(bd_5);
 
         BuildingData bd_6 = new BuildingData();
@@ -77,6 +82,7 @@ public class CampusData {
         bd_6.setLng(-121.879916);
         bd_6.setStreetViewCoord(new Coordinates(37.332687,-121.880516));
         bd_6.setBimage(R.drawable.garage);
+        bd_6.setAbbr("spg");
         buildingData.add(bd_6);
     }
 

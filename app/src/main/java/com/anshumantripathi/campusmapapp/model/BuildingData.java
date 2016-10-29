@@ -14,7 +14,15 @@ public class BuildingData {
     private int xPixel;
     private int yPixel;
     private Coordinates streetViewCoord;
+    private String abbr;
 
+    public String getAbbr(){
+        return abbr;
+    }
+
+    public void setAbbr(String abbr) {
+        this.abbr = abbr;
+    }
 
     public Coordinates getStreetViewCoord() {
         return streetViewCoord;
