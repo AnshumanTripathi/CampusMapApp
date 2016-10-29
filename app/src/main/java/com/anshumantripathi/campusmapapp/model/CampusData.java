@@ -147,7 +147,7 @@ public class CampusData {
         point4.setLat(37.331550);
         point4.setLng(-121.882851);
 
-//        this.convUtils = new ConversionUtils(point1, point2, point4, point3,);
+        this.convUtils = new ConversionUtils(point1, point2, point4, point3);
 
     }
     

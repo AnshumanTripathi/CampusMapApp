@@ -35,7 +35,9 @@ import com.anshumantripathi.campusmapapp.model.CampusData;
 import com.anshumantripathi.campusmapapp.model.Coordinates;
 import com.anshumantripathi.campusmapapp.model.Pin;
 import com.anshumantripathi.campusmapapp.model.RedDot;
+import com.anshumantripathi.campusmapapp.util.ConversionUtils;
 import com.anshumantripathi.campusmapapp.util.LocationContext;
+import com.anshumantripathi.campusmapapp.util.PinDrawUtils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -86,6 +88,8 @@ public class MainActivity extends AppCompatActivity {
         long screenWidth = metrics.widthPixels;
         long screenHeight = metrics.heightPixels;
 
+        System.out.println("screen:" + screenWidth + " " + screenHeight);
+
 //        long screenHeight = 850;//campusImage.getMaxHeight();
 //        long screenWidth = 740; //campusImage.getMaxWidth();
 
@@ -108,6 +112,19 @@ public class MainActivity extends AppCompatActivity {
         fLayout.addView(locatoinDot, params);
 
         // **** try pin on the main image *********
+        Coordinates testC = new Coordinates(37.334557, -121.876453);
+//        double xP = 65 + cd.convUtils.getCurrentPixelX(testC);
+//        double yP = 550 + cd.convUtils.getCurrentPixelY(testC);
+        Coordinates xy = cd.convUtils.coordinatesToPixels(testC.getLng(), testC.getLat());
+        double xP = xy.getLng();
+        double yP = xy.getLat();
+        System.out.println("converted pixels are: " + xP + ", " + yP);
+        PinDrawUtils.drawPinAtPixel(
+                this,
+                (FrameLayout) findViewById(R.id.frameLayout),
+                (int) xP,
+                (int) yP
+        );
 
         // *********************************************************
 
@@ -131,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
         searchbar.getText().clear();
         // remove all the pins which were set according to search results which are set in loc
         // context.
-        // reset the location context here. complete reset functionality too. 
+        // reset the location context here. complete reset functionality too.
     }
 
     public void checkPermission() {
