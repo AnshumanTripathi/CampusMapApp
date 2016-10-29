@@ -17,12 +17,14 @@ import com.anshumantripathi.campusmapapp.util.LocationContext;
 
 public class Pin extends View {
 
-
     Bitmap pin;
     Paint mPaint;
+    int xP, yP;
 
-    public Pin(Context context) {
+    public Pin(Context context, int xPixel, int yPixel) {
         super(context);
+        this.xP = xPixel;
+        this.yP = yPixel;
         setWillNotDraw(false);
         pin = BitmapFactory.decodeResource(getResources(), R.drawable.pin);
         mPaint = new Paint();
@@ -32,9 +34,7 @@ public class Pin extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         System.out.print("onDraw Called!");
-        LocationContext ctx = LocationContext.getInstance();
-
-        canvas.drawBitmap(pin,ctx.getxPixel(),ctx.getyPixel(),null);
+        canvas.drawBitmap(pin,xP, yP, null);
 
         canvas.save();
         canvas.restore();

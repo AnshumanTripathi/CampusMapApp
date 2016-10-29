@@ -32,6 +32,7 @@ import com.anshumantripathi.campusmapapp.activities.Handlers.SearchButtonClickHa
 import com.anshumantripathi.campusmapapp.activities.Handlers.UserLocationChangeHandler;
 import com.anshumantripathi.campusmapapp.model.CampusData;
 import com.anshumantripathi.campusmapapp.model.Coordinates;
+import com.anshumantripathi.campusmapapp.model.Pin;
 import com.anshumantripathi.campusmapapp.model.RedDot;
 import com.anshumantripathi.campusmapapp.util.LocationContext;
 
@@ -96,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
 //        Log.v("x",String.valueOf(x));
 //        Log.v("y",String.valueOf(y));
 
-
         ctx.setxPixel(screenWidth / 2);
         ctx.setyPixel(screenHeight / 2);
         RedDot locatoinDot = new RedDot(MainActivity.this);
@@ -105,6 +105,9 @@ public class MainActivity extends AppCompatActivity {
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         fLayout.addView(locatoinDot, params);
+
+        // **** try pin on the main image *********
+
         // *********************************************************
 
         campusImage.setOnTouchListener(new BuildingClickHandler(this, currAppContext));
@@ -119,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onBuildingDetailsFetch() {
+
 
     }
 

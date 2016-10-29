@@ -6,8 +6,8 @@ package com.anshumantripathi.campusmapapp.model;
 
 public class Coordinates {
 
-    private double lat;
-    private double lng;
+    private double lat; // lat is y
+    private double lng; // longitude is x
 
     public Coordinates() {
     }

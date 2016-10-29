@@ -1,6 +1,7 @@
 package com.anshumantripathi.campusmapapp.model;
 
 import com.anshumantripathi.campusmapapp.R;
+import com.anshumantripathi.campusmapapp.util.ConversionUtils;
 
 import java.util.ArrayList;
 public class CampusData {
@@ -11,6 +12,8 @@ public class CampusData {
     private Coordinates point4;
     private ArrayList<BuildingData> buildingData;
     public ArrayList<String> buildingName;
+
+    public ConversionUtils convUtils = null;
 
     public ArrayList<BuildingData> getBuildingData() {
         return buildingData;
@@ -143,6 +146,8 @@ public class CampusData {
         point4 =  new Coordinates();
         point4.setLat(37.331550);
         point4.setLng(-121.882851);
+
+//        this.convUtils = new ConversionUtils(point1, point2, point4, point3,);
 
     }
     

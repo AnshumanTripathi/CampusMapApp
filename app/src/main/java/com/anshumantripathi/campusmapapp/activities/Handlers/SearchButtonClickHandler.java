@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import com.anshumantripathi.campusmapapp.R;
+import com.anshumantripathi.campusmapapp.activities.MainActivity;
 import com.anshumantripathi.campusmapapp.model.BuildingData;
 import com.anshumantripathi.campusmapapp.model.CampusData;
 import com.anshumantripathi.campusmapapp.model.Constants;
@@ -30,7 +31,8 @@ public class SearchButtonClickHandler implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         //dismiss soft keypad
-        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(
+                Activity.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 
         //get the references to the UI elements
@@ -39,6 +41,7 @@ public class SearchButtonClickHandler implements View.OnClickListener{
 
         //passing the search query to the search function
         searchBuilding(searchQuery);
+        ((MainActivity) activity).onBuildingDetailsFetch();
     }
 
     //search for the buildings as per the search query passed.
@@ -54,7 +57,8 @@ public class SearchButtonClickHandler implements View.OnClickListener{
                 String buildingAbbr = cd.getBuildingData().get(id).getAbbr().toLowerCase();
 
                 //if the search qquery matches some text in the name or is equal to abbr
-                if ((buildingName.contains(searchQuery) == true) || (buildingName.equals(buildingAbbr))) {
+                if ((buildingName.contains(searchQuery) == true)
+                        || (buildingAbbr.equals(searchQuery))) {
                     op.add(bd);
                 }
             }

@@ -22,9 +22,6 @@ import com.anshumantripathi.campusmapapp.util.MapUtils;
 
 import java.util.concurrent.ExecutionException;
 
-/**
- * Created by saurabg on 10/27/16.
- */
 
 public class BuildingClickHandler implements View.OnTouchListener {
     private LocationContext currContext;
@@ -40,6 +37,7 @@ public class BuildingClickHandler implements View.OnTouchListener {
         img.setDrawingCacheEnabled(true);
         Bitmap hotspots = Bitmap.createBitmap(img.getDrawingCache());
         img.setDrawingCacheEnabled(false);
+        System.out.println("clicked pixels are: " + x + " " + y);
         return hotspots.getPixel(x, y);
     }
 

@@ -6,10 +6,6 @@ import android.os.Bundle;
 
 import com.anshumantripathi.campusmapapp.util.LocationContext;
 
-/**
- * Created by saurabg on 10/28/16.
- */
-
 // use dependency injection as much as possible
 public class UserLocationChangeHandler implements LocationListener {
     LocationContext currContext;

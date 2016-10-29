@@ -1,9 +1,5 @@
 package com.anshumantripathi.campusmapapp.util;
 
-/**
- * Created by saurabg on 10/28/16.
- */
-
 public class MapUtils {
 
     /*This method will prepare the Google API UrL to obtain the distance and time between two points.*/

@@ -28,6 +28,7 @@ public class ScreenContext extends Activity{
             return new ScreenContext();
         else return instance;
     }
+
     public int getxPixel() {
         return xPixel;
     }
@@ -54,7 +55,7 @@ public class ScreenContext extends Activity{
     }
 
     public void drawPin(Context context){
-        Pin pin = new Pin(context);
+        Pin pin = new Pin(context, this.xPixel, this.yPixel);
         FrameLayout fLayout = (FrameLayout) findViewById(R.id.frameLayout);
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         fLayout.addView(pin,params);
