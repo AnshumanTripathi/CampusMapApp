@@ -102,8 +102,13 @@ public class MainActivity extends AppCompatActivity {
 //        Log.v("x",String.valueOf(x));
 //        Log.v("y",String.valueOf(y));
 
-        ctx.setxPixel(screenWidth / 2);
-        ctx.setyPixel(screenHeight / 2);
+        Coordinates testC = new Coordinates(37.334537, -121.884430);
+//        double xP = 65 + cd.convUtils.getCurrentPixelX(testC);
+//        double yP = 550 + cd.convUtils.getCurrentPixelY(testC);
+        Coordinates xP = cd.convUtils.coorToPixels(testC);
+
+        ctx.setxPixel((int)xP.getLng() + 65);
+        ctx.setyPixel((int) xP.getLat() + 550);
         RedDot locatoinDot = new RedDot(MainActivity.this);
         FrameLayout fLayout = (FrameLayout) findViewById(R.id.frameLayout);
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
@@ -112,19 +117,16 @@ public class MainActivity extends AppCompatActivity {
         fLayout.addView(locatoinDot, params);
 
         // **** try pin on the main image *********
-        Coordinates testC = new Coordinates(37.334557, -121.876453);
-//        double xP = 65 + cd.convUtils.getCurrentPixelX(testC);
-//        double yP = 550 + cd.convUtils.getCurrentPixelY(testC);
-        Coordinates xy = cd.convUtils.coordinatesToPixels(testC.getLng(), testC.getLat());
-        double xP = xy.getLng();
-        double yP = xy.getLat();
-        System.out.println("converted pixels are: " + xP + ", " + yP);
-        PinDrawUtils.drawPinAtPixel(
-                this,
-                (FrameLayout) findViewById(R.id.frameLayout),
-                (int) xP,
-                (int) yP
-        );
+//        Coordinates xy = cd.convUtils.coordinatesToPixels(testC.getLng(), testC.getLat());
+//        double xP = xy.getLng();
+//        double yP = xy.getLat();
+        System.out.println("converted pixels are: " + xP.getLng() + 65 + ", " + xP.getLng() + 550);
+//        PinDrawUtils.drawPinAtPixel(
+//                this,
+//                (FrameLayout) findViewById(R.id.frameLayout),
+//                (int) xP.getLng() + 65,
+//                (int) xP.getLat() + 500
+//        );
 
         // *********************************************************
 

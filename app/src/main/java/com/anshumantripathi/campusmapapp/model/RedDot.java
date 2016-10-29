@@ -26,7 +26,7 @@ public class RedDot extends View {
         ctx = LocationContext.getInstance();
         mPaint.setColor(Color.RED);
         mPaint.setStyle(Paint.Style.FILL);
-        canvas.drawCircle(ctx.getxPixel(),ctx.getyPixel(),10,mPaint);
+        canvas.drawCircle(ctx.getxPixel(),ctx.getyPixel(),30,mPaint);
         canvas.save();
         canvas.restore();
         super.onDraw(canvas);
