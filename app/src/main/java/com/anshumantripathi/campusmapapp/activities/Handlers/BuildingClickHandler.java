@@ -150,7 +150,7 @@ public class BuildingClickHandler implements View.OnTouchListener {
 
         switch (action) {
             case MotionEvent.ACTION_UP:
-
+                System.out.println("Pixel: "+envX+","+envY);
                 this.currContext.setMode(TravelMode.BICYCLING.name());
                 boolean isValidLocClicked = setDestinationLocationInContext(envX, envY);
                 try {

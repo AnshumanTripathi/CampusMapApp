@@ -19,31 +19,32 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.anshumantripathi.campusmapapp.R;
 import com.anshumantripathi.campusmapapp.activities.Handlers.BuildingClickHandler;
 import com.anshumantripathi.campusmapapp.activities.Handlers.GenericToastManager;
 import com.anshumantripathi.campusmapapp.activities.Handlers.SearchButtonClickHandler;
-import com.anshumantripathi.campusmapapp.activities.Handlers.SearchResultsClearHandler;
 import com.anshumantripathi.campusmapapp.activities.Handlers.UserLocationChangeHandler;
+import com.anshumantripathi.campusmapapp.model.BuildingData;
 import com.anshumantripathi.campusmapapp.model.CampusData;
+import com.anshumantripathi.campusmapapp.model.Constants;
 import com.anshumantripathi.campusmapapp.model.Coordinates;
 import com.anshumantripathi.campusmapapp.model.Pin;
 import com.anshumantripathi.campusmapapp.model.RedDot;
+import com.anshumantripathi.campusmapapp.util.ClearCanvas;
 import com.anshumantripathi.campusmapapp.util.LocationContext;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final int ACCESS_COARSE_LOCATION = 1;
     LocationContext ctx = LocationContext.getInstance();
-    EditText searchbar;
-    ImageButton searchbutton;
-    ImageButton clear;
+    SearchView searchBar;
     FloatingActionButton fab;
     CampusData cd = new CampusData();
 
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         // init model data
         LocationContext currAppContext = LocationContext.getInstance();
         currAppContext.resetContext();
@@ -62,17 +64,11 @@ public class MainActivity extends AppCompatActivity {
         getCurrentLocation();
 
         // ************ initialize the UI elements on screen ********************
-        searchbar = (EditText) findViewById(R.id.searchbar);
-        searchbutton = (ImageButton) findViewById(R.id.search_button);
-        clear = (ImageButton) findViewById(R.id.clear);
+        searchBar = (SearchView) findViewById(R.id.searchbar);
         fab = (FloatingActionButton) findViewById(R.id.location_fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
         final ImageView campusImage = (ImageView) findViewById(R.id.campusImage);
+
+
 
         // ******************** Test code **************************
 
@@ -107,31 +103,37 @@ public class MainActivity extends AppCompatActivity {
 
         fLayout.addView(locatoinDot, params);
 
-        // **** try pin on the main image *********
+//            ****************************************************************************
 
-        // *********************************************************
+
+        searchBar.setOnQueryTextListener(new SearchButtonClickHandler(this, cd, ctx));
 
         campusImage.setOnTouchListener(new BuildingClickHandler(this, currAppContext));
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        searchbutton.setOnClickListener(new SearchButtonClickHandler(this, cd, ctx));
-        clear.setOnClickListener(new SearchResultsClearHandler(this, cd, ctx));
+            }
+        });
+
     }
 
     public void onBuildingDetailsFetch() {
-        // TODO
 
-        // search results are set in loc context. Draw pins at all those locations through
-        // PinDrawUtils
-
-
+       System.out.println("Add pin method called");
+        Pin pin = new Pin(MainActivity.this);
+        FrameLayout frameLayout = (FrameLayout) findViewById(R.id.frameLayout);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        frameLayout.addView(pin,params);
     }
 
     public void onSearchClear() {
-        // TODO
-        searchbar.getText().clear();
-        // remove all the pins which were set according to search results which are set in loc
-        // context.
-        // reset the location context here. complete reset functionality too. 
+        ClearCanvas clear = new ClearCanvas(this);
+        FrameLayout frameLayout = (FrameLayout) findViewById(R.id.frameLayout);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        frameLayout.addView(clear,params);
     }
 
     public void checkPermission() {
@@ -258,8 +260,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public EditText getSearchbar(){
-        return this.searchbar;
-    }
+//    public EditText getSearchbar(){
+//        return this.searchBar;
+//    }
 
+    public void searchBuilding(String searchQuery) {
+        ArrayList<BuildingData> op = new ArrayList<>();
+        for (int id = 0; id < Constants.BUILD_COUNT; id++) {
+            //get the building data object
+            BuildingData bd = cd.getBuildingData().get(id);
+            if (bd != null) {
+
+                //obtain the name and abbr
+                String buildingName = bd.getName().toLowerCase();
+                String buildingAbbr = cd.getBuildingData().get(id).getAbbr().toLowerCase();
+
+                //if the search qquery matches some text in the name or is equal to abbr
+                if ((buildingName.contains(searchQuery))
+                        || (buildingAbbr.equals(searchQuery))) {
+                    op.add(bd);
+                }
+            }
+        }
+        ctx.setSearchResult(op);
+    }
 }

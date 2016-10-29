@@ -28,40 +28,19 @@
 
             <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_height="wrap_content">
 
-                <EditText
+                <SearchView
                     android:id="@+id/searchbar"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginEnd="40dp"
+                    android:layout_height="40dp"
                     android:ems="10"
+                    android:layout_centerHorizontal="true"
                     android:inputType="textPersonName"
-                    android:paddingStart="3dp"
-                    android:paddingEnd="10dp"
                     android:background="@drawable/rounded_edittext"/>
 
-                <ImageButton
-                    android:id="@+id/clear"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_alignEnd="@id/searchbar"
-                    android:src="@drawable/clear"
-                    android:background="@null"/>
             </RelativeLayout>
-
-            <ImageButton
-                android:id="@+id/search_button"
-                android:layout_width="23dp"
-                android:layout_height="31dp"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="5dp"
-                android:background="@null"
-                android:clickable="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/search" />
         </LinearLayout>
 
     </android.support.v7.widget.Toolbar>
@@ -80,7 +59,6 @@
                 android:src="@drawable/image_overlay"
                 android:scaleType="fitXY"
                 android:visibility="invisible"/>
-
 
             <ImageView
                 android:id="@+id/campusImage"

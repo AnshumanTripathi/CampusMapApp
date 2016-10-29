@@ -2,21 +2,20 @@ package com.anshumantripathi.campusmapapp.activities.Handlers;
 
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
-import com.anshumantripathi.campusmapapp.R;
+
 import com.anshumantripathi.campusmapapp.activities.MainActivity;
 import com.anshumantripathi.campusmapapp.model.BuildingData;
 import com.anshumantripathi.campusmapapp.model.CampusData;
 import com.anshumantripathi.campusmapapp.model.Constants;
 import com.anshumantripathi.campusmapapp.util.LocationContext;
+
 import java.util.ArrayList;
 
-public class SearchButtonClickHandler implements View.OnClickListener{
+public class SearchButtonClickHandler implements android.widget.SearchView.OnQueryTextListener{
     private AppCompatActivity activity;
     private CampusData cd;
-    LocationContext ctx;
+    private LocationContext ctx;
 
     public SearchButtonClickHandler(
             AppCompatActivity activity,
@@ -28,22 +27,25 @@ public class SearchButtonClickHandler implements View.OnClickListener{
         this.ctx = ctx;
     }
 
+
     @Override
-    public void onClick(View v) {
+    public boolean onQueryTextSubmit(String query) {
         //dismiss soft keypad
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(
                 Activity.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-
-        //get the references to the UI elements
-        EditText searchBar = (EditText) activity.findViewById(R.id.searchbar);
-        String searchQuery = searchBar.getText().toString();
-
-        //passing the search query to the search function
-        searchBuilding(searchQuery);
+        searchBuilding(query);
         ((MainActivity) activity).onBuildingDetailsFetch();
+        return false;
     }
 
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        if(newText.equals("")) {
+            ((MainActivity) activity).onSearchClear();
+        }
+        return false;
+    }
     //search for the buildings as per the search query passed.
     public void searchBuilding(String searchQuery) {
         ArrayList<BuildingData> op = new ArrayList<>();
@@ -57,7 +59,7 @@ public class SearchButtonClickHandler implements View.OnClickListener{
                 String buildingAbbr = cd.getBuildingData().get(id).getAbbr().toLowerCase();
 
                 //if the search qquery matches some text in the name or is equal to abbr
-                if ((buildingName.contains(searchQuery) == true)
+                if ((buildingName.contains(searchQuery))
                         || (buildingAbbr.equals(searchQuery))) {
                     op.add(bd);
                 }
