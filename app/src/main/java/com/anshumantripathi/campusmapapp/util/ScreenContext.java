@@ -2,6 +2,7 @@ package com.anshumantripathi.campusmapapp.util;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.DisplayMetrics;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -11,6 +12,8 @@ import com.anshumantripathi.campusmapapp.activities.MainActivity;
 import com.anshumantripathi.campusmapapp.model.CampusData;
 import com.anshumantripathi.campusmapapp.model.Pin;
 
+import java.util.ArrayList;
+
 /**
  * Created by AnshumanTripathi on 10/26/16.
  */
@@ -19,9 +22,22 @@ public class ScreenContext extends Activity{
     private static ScreenContext instance;
     private int xPixel;
     private int yPixel;
+    private static ArrayList<Bitmap> pins = new ArrayList<Bitmap>();
     private float pixelPerLocation;
     private int screenWidth;
     private int screenHeight;
+
+    public static ArrayList<Bitmap> getPins() {
+        return pins;
+    }
+
+    public static void setPins(Bitmap pin) {
+        pins.add(pin);
+    }
+
+    public static void clearPins(){
+        pins.clear();
+    }
 
     public static ScreenContext getInstance(){
         if(instance == null)
@@ -55,10 +71,10 @@ public class ScreenContext extends Activity{
     }
 
     public void drawPin(Context context){
-        Pin pin = new Pin(context, this.xPixel, this.yPixel);
-        FrameLayout fLayout = (FrameLayout) findViewById(R.id.frameLayout);
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        fLayout.addView(pin,params);
+//        Pin pin = new Pin(context, this.xPixel, this.yPixel);
+//        FrameLayout fLayout = (FrameLayout) findViewById(R.id.frameLayout);
+//        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//        fLayout.addView(pin,params);
 
     }
 }

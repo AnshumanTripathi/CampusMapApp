@@ -33,6 +33,8 @@ public class CampusData {
         bd_1.setLng(-121.884999);
         bd_1.setBimage(R.drawable.library);
         bd_1.setStreetViewCoord(new Coordinates(37.335785,-121.885790));
+        bd_1.setxPixel(195);
+        bd_1.setyPixel(632);
         bd_1.setAbbr("king");
         buildingData.add(bd_1);
 
@@ -44,6 +46,8 @@ public class CampusData {
         bd_2.setLng(-121.881276);
         bd_2.setBimage(R.drawable.eng_building);
         bd_2.setStreetViewCoord(new Coordinates(37.337404,-121.882614));
+        bd_2.setxPixel(826);
+        bd_2.setyPixel(637);
         bd_2.setAbbr("eng");
         buildingData.add(bd_2);
 
@@ -56,6 +60,8 @@ public class CampusData {
         bd_3.setStreetViewCoord(new Coordinates(37.333362,-121.884132));
         bd_3.setBimage(R.drawable.ychall);
         bd_3.setAbbr("yuh");
+        bd_3.setxPixel(165);
+        bd_3.setyPixel(1297);
         buildingData.add(bd_3);
 
         BuildingData bd_4 = new BuildingData();
@@ -65,7 +71,10 @@ public class CampusData {
         bd_4.setLng(-122.170939);
         bd_4.setStreetViewCoord(new Coordinates(37.337247,-121.882780));
         bd_4.setBimage(R.drawable.studentunion);
+        bd_4.setxPixel(868);
+        bd_4.setyPixel(852);
         bd_4.setAbbr("su");
+
         buildingData.add(bd_4);
 
         BuildingData bd_5 = new BuildingData();
@@ -76,6 +85,8 @@ public class CampusData {
         bd_5.setStreetViewCoord(new Coordinates(37.336855,-121.878296));
         bd_5.setBimage(R.drawable.bbc);
         bd_5.setAbbr("bbc");
+        bd_5.setxPixel(1257);
+        bd_5.setyPixel(1042);
         buildingData.add(bd_5);
 
         BuildingData bd_6 = new BuildingData();
@@ -86,6 +97,8 @@ public class CampusData {
         bd_6.setStreetViewCoord(new Coordinates(37.332687,-121.880516));
         bd_6.setBimage(R.drawable.garage);
         bd_6.setAbbr("spg");
+        bd_6.setxPixel(559);
+        bd_6.setyPixel(1812);
         buildingData.add(bd_6);
     }
 
