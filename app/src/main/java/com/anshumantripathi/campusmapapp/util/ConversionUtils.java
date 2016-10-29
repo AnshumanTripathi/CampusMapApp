@@ -1,5 +1,7 @@
 package com.anshumantripathi.campusmapapp.util;
 
+import android.location.Location;
+
 import com.anshumantripathi.campusmapapp.model.Coordinates;
 
 /**
@@ -35,5 +37,29 @@ public class ConversionUtils {
         }
         return new Coordinates(r1, r2);
     }
+
+//    public double getCurrentPixelX(Location upperLeft, Location lowerRight, Location current) {
+//        double hypotenuse = upperLeft.distanceTo(current);
+//        double bearing = upperLeft.bearingTo(current);
+//        double currentDistanceX = Math.sin(bearing * Math.PI / OneEightyDeg) * hypotenuse;
+//        //                           "percentage to mark the position"
+//        double totalHypotenuse = upperLeft.distanceTo(lowerRight);
+//        double totalDistanceX = totalHypotenuse * Math.sin(upperLeft.bearingTo(lowerRight) * Math.PI / OneEightyDeg);
+//        double currentPixelX = currentDistanceX / totalDistanceX * ImageSizeW;
+//
+//        return currentPixelX;
+//    }
+//
+//    public double getCurrentPixelY(Location upperLeft, Location lowerRight, Location current) {
+//        double hypotenuse = upperLeft.distanceTo(current);
+//        double bearing = upperLeft.bearingTo(current);
+//        double currentDistanceY = Math.cos(bearing * Math.PI / OneEightyDeg) * hypotenuse;
+//        //                           "percentage to mark the position"
+//        double totalHypotenuse = upperLeft.distanceTo(lowerRight);
+//        double totalDistanceY = totalHypotenuse * Math.cos(upperLeft.bearingTo(lowerRight) * Math.PI / OneEightyDeg);
+//        double currentPixelY = currentDistanceY / totalDistanceY * ImageSizeH;
+//
+//        return currentPixelY;
+//    }
 
 }

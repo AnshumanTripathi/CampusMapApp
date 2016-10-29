@@ -3,6 +3,7 @@ package com.anshumantripathi.campusmapapp.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -15,7 +16,7 @@ import com.anshumantripathi.campusmapapp.tasks.StreetViewTask;
 import com.anshumantripathi.campusmapapp.util.LocationContext;
 
 public class BuildingDetailActivity extends Activity {
-    Button streetView;
+    FloatingActionButton streetView;
     TextView bname;
     TextView baddress;
     TextView distance;
@@ -28,15 +29,15 @@ public class BuildingDetailActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_building_detail);
 
-        streetView = (Button) findViewById(R.id.streetview);
-        bname = (TextView) findViewById(R.id.bname);
+        streetView = (FloatingActionButton) findViewById(R.id.streetview);
+//        bname = (TextView) findViewById(R.id.bname);
         baddress = (TextView) findViewById(R.id.baddress);
         distance = (TextView) findViewById(R.id.distance);
         time = (TextView) findViewById(R.id.time);
         bimage = (ImageView) findViewById(R.id.bimage);
 
         //Display all the params on the screen
-        bname.setText(ctx.getBuildData().getName());
+//        bname.setText(ctx.getBuildData().getName());
         baddress.setText(ctx.getBuildData().getAddress());
         distance.setText(ctx.getDistance());
         time.setText(ctx.getTime());

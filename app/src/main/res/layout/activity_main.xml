@@ -66,36 +66,29 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <LinearLayout
-        android:id="@+id/image_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:orientation="vertical">
-
         <FrameLayout
             android:id="@+id/frameLayout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginTop="40dp">
 
             <ImageView
                 android:id="@+id/imageOverlay"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:scaleType="fitCenter"
                 android:src="@drawable/image_overlay"
-                android:visibility="invisible" />
+                android:scaleType="fitXY"
+                android:visibility="invisible"/>
 
 
             <ImageView
                 android:id="@+id/campusImage"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:scaleType="fitCenter"
+                android:scaleType="fitXY"
                 android:src="@drawable/campus_image" />
         </FrameLayout>
-    </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/location_fab"
@@ -107,7 +100,7 @@
 
         app:backgroundTint="@android:color/darker_gray"
         app:elevation="24dp"
-        app:layout_anchor="@id/image_layout"
+        app:layout_anchor="@id/frameLayout"
         app:layout_anchorGravity="bottom|end" />
 
 </android.support.design.widget.CoordinatorLayout>
