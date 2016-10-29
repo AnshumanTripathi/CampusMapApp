@@ -47,7 +47,7 @@ public class SearchButtonClickHandler implements View.OnClickListener{
         Log.v("Search Query:", searchQuery);
         ArrayList<String> op = new ArrayList<>();
         for (int id = 0; id < Constants.BUILD_COUNT; id++) {
-            String buildingName = campusData.buildingData.get(id).getName().toLowerCase();
+            String buildingName = campusData.getBuildingData().get(id).getName().toLowerCase();
             Log.v("Checking Building:", buildingName);
             if (buildingName.contains(searchQuery) == true) {
                 Log.v("MATCHES:", buildingName);
