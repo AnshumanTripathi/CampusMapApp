@@ -33,10 +33,9 @@ import com.anshumantripathi.campusmapapp.model.BuildingData;
 import com.anshumantripathi.campusmapapp.model.CampusData;
 import com.anshumantripathi.campusmapapp.model.Constants;
 import com.anshumantripathi.campusmapapp.model.Coordinates;
-import com.anshumantripathi.campusmapapp.model.Pin;
 import com.anshumantripathi.campusmapapp.model.RedDot;
-import com.anshumantripathi.campusmapapp.util.ClearCanvas;
 import com.anshumantripathi.campusmapapp.util.LocationContext;
+import com.anshumantripathi.campusmapapp.util.PinDrawUtils;
 
 import java.util.ArrayList;
 
@@ -124,19 +123,11 @@ public class MainActivity extends AppCompatActivity {
     public void onBuildingDetailsFetch() {
 
        System.out.println("Add pin method called");
-        Pin pin = new Pin(MainActivity.this);
-        FrameLayout frameLayout = (FrameLayout) findViewById(R.id.frameLayout);
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        frameLayout.addView(pin,params);
+        PinDrawUtils.drawPinAtPixel(this,(FrameLayout) findViewById(R.id.frameLayout));
     }
 
     public void onSearchClear() {
-        ClearCanvas clear = new ClearCanvas(this);
-        FrameLayout frameLayout = (FrameLayout) findViewById(R.id.frameLayout);
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        frameLayout.addView(clear,params);
+        PinDrawUtils.clearPinAtPixel(this, (FrameLayout) findViewById(R.id.frameLayout));
     }
 
     public void checkPermission() {

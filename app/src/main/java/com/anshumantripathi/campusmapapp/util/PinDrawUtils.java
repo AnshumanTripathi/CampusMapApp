@@ -10,15 +10,18 @@ import com.anshumantripathi.campusmapapp.model.Pin;
 
 public class PinDrawUtils {
 
-    public void drawPinAtPixel(Context context, FrameLayout flayout, int xPixel, int yPixel) {
-//        Pin pinLoc = new Pin(context, xPixel, yPixel);
-//        FrameLayout.LayoutParams paramsP = new FrameLayout.LayoutParams(
-//                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-//
-//        flayout.addView(pinLoc, paramsP);
+    public static void drawPinAtPixel(Context context, FrameLayout frameLayout) {
+        Pin pinLoc = new Pin(context);
+        FrameLayout.LayoutParams paramsP = new FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        frameLayout.addView(pinLoc, paramsP);
     }
 
-    public void clearPinAtPixel(Context context, int xPixel, int yPixel) {
-
+    public static void clearPinAtPixel(Context context, FrameLayout frameLayout) {
+        ClearCanvas clear = new ClearCanvas(context);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        frameLayout.addView(clear,params);
     }
 }

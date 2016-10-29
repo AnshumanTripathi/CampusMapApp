@@ -32,7 +32,7 @@ public class BuildingDetailActivity extends AppCompatActivity {
         myToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(BuildingDetailActivity.this,MainActivity.class));
+                startActivity(new Intent(BuildingDetailActivity.this, MainActivity.class));
             }
         });
 
@@ -56,23 +56,6 @@ public class BuildingDetailActivity extends AppCompatActivity {
                 startActivity(in);
             }
         });
-    }
-
-    //TODO Check this Method
-    private String prepareStreetViewURL(int sizeX, int sizeY, String address) {
-        String newAddress = address.replace(" ","%20");
-        String url = "";
-
-        url += "https://maps.googleapis.com/maps/api/streetview?";
-        url += "size=" + Integer.toString(sizeX) + "x" + Integer.toString(sizeY);
-        url += "&location=";
-        url += newAddress;
-//        if(heading != -1) {
-//            url += "&heading=";
-//            url += Double.toString(heading);
-//        }
-        Log.v("URL:",url);
-        return url;
     }
 
 }
