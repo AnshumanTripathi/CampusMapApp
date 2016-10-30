@@ -13,9 +13,12 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.SearchView;
+import android.widget.TextClock;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anshumantripathi.campusmapapp.R;
@@ -35,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     LocationContext ctx = LocationContext.getInstance();
     SearchView searchBar;
     FloatingActionButton fab;
+    TextView searchText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +51,23 @@ public class MainActivity extends AppCompatActivity {
 
         // ************ initialize the UI elements on screen ********************
         searchBar = (SearchView) findViewById(R.id.searchbar);
+        searchText = (TextView) findViewById(R.id.search_text);
         fab = (FloatingActionButton) findViewById(R.id.location_fab);
         final ImageView campusImage = (ImageView) findViewById(R.id.campusImage);
 
+        searchBar.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                searchText.setVisibility(View.GONE);
+            }
+        });
+        searchBar.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                searchText.setVisibility(View.VISIBLE);
+                return false;
+            }
+        });
         searchBar.setOnQueryTextListener(new SearchButtonClickHandler(this, ctx));
 
         campusImage.setOnTouchListener(new BuildingClickHandler(this, currAppContext));
