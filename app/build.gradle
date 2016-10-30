@@ -4,6 +4,7 @@ android {
     compileSdkVersion 23
     buildToolsVersion "24.0.2"
     defaultConfig {
+        multiDexEnabled true
         applicationId "com.anshumantripathi.campusmapapp"
         minSdkVersion 21
         targetSdkVersion 23
