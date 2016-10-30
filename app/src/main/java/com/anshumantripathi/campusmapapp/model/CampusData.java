@@ -42,8 +42,8 @@ public class CampusData {
         bd_2 = new BuildingData();
         bd_2.setName("Engineering Building");
         bd_2.setAddress("San José State University Charles W. Davidson College of Engineering, 1 Washington Square, San Jose, CA 95112");
-        bd_2.setLat(37.335142);
-        bd_2.setLng(-121.881276);
+        bd_2.setLat(37.337010);
+        bd_2.setLng(-121.881623);
         bd_2.setBimage(R.drawable.eng_building);
         bd_2.setStreetViewCoord(new Coordinates(37.337404,-121.882614));
         bd_2.setxPixel(826);
@@ -92,8 +92,8 @@ public class CampusData {
         BuildingData bd_6 = new BuildingData();
         bd_6.setName("South Parking Garage");
         bd_6.setAddress("San Jose State University South Garage, 330 South 7th Street, San Jose, CA 95112");
-        bd_6.setLat(37.333474);
-        bd_6.setLng(-121.879916);
+        bd_6.setLat(37.333197);
+        bd_6.setLng(-121.880608);
         bd_6.setStreetViewCoord(new Coordinates(37.332687,-121.880516));
         bd_6.setBimage(R.drawable.garage);
         bd_6.setAbbr("spg");

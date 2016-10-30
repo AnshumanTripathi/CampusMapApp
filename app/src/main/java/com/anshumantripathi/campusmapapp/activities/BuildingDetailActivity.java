@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,7 +26,7 @@ public class BuildingDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_building_detail);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.myToolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setTitle(getString(R.string.app_name));
+        getSupportActionBar().setTitle(ctx.getBuildData().getName());
         myToolbar.setNavigationIcon(R.drawable.back);
         myToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

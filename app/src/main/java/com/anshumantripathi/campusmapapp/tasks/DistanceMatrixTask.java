@@ -57,8 +57,8 @@ public class DistanceMatrixTask extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        LocationContext.getInstance().setDistanceMatrixResp(server_response);
-        parseDistanceMatrix(LocationContext.getInstance().getDistanceMatrixResp());
+        LocationContext.setDistanceMatrixResp(server_response);
+        parseDistanceMatrix(LocationContext.getDistanceMatrixResp());
         Intent in = new Intent(this.context, BuildingDetailActivity.class);
         in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(in);
