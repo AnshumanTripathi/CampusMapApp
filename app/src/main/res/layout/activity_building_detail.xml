@@ -124,14 +124,14 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/streetview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="78dp"
+        android:layout_height="73dp"
         android:clickable="true"
         android:src="@drawable/street_view"
         app:layout_anchor="@+id/image_layout"
         app:layout_anchorGravity="bottom|right"
         android:layout_marginEnd="20dp"
-        app:backgroundTint="@android:color/darker_gray"
-        app:rippleColor="@color/white"
-        app:elevation="0dp" />
+        app:backgroundTint="@android:color/background_light"
+        app:rippleColor="@color/wallet_holo_blue_light"
+        app:elevation="11dp" />
 </android.support.design.widget.CoordinatorLayout>
