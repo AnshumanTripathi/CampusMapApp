@@ -36,6 +36,10 @@ public class BuildingData {
 
     }
 
+    public Coordinates getBuildingActualCoordinates() {
+        return new Coordinates(this.lat, this.lng);
+    }
+
     public int getBimage() {
         return bimage;
     }

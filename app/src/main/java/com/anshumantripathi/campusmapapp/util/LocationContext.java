@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 
 import com.anshumantripathi.campusmapapp.model.BuildingData;
+import com.anshumantripathi.campusmapapp.model.CampusData;
 import com.anshumantripathi.campusmapapp.model.Coordinates;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 public class LocationContext extends Activity {
 
     private static LocationContext instance;
+    public CampusData cd = new CampusData();
 
     public static void setInstance(LocationContext instance) {
         LocationContext.instance = instance;
@@ -19,7 +21,6 @@ public class LocationContext extends Activity {
 
     //************** data about search operation **************
     static ArrayList<BuildingData> searchResult = new ArrayList<>();
-
 
     //********** data about building and transit detail (when someone clicks on a building) *******
     private static String distance;
@@ -33,7 +34,7 @@ public class LocationContext extends Activity {
     private static long yPixel;
 
     //********** detail about the current user *****************
-    private static Coordinates currentLocation;
+    private static Coordinates currentLocation = null;
     //this is a redundant param, we can plan to remove it.
     private static Coordinates destinationLocation;
 
@@ -161,5 +162,4 @@ public class LocationContext extends Activity {
     public void setSearchResult(ArrayList<BuildingData> searchResult) {
         this.searchResult = searchResult;
     }
-
 }
