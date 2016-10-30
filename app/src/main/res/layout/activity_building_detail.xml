@@ -37,7 +37,7 @@
                 android:id="@+id/bimage"
                 android:layout_width="match_parent"
                 android:layout_height="288dp"
-                android:src="@drawable/ychall" />
+                android:src="@drawable/eng_building" />
         </LinearLayout>
 
         <LinearLayout
@@ -64,7 +64,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:text="Building Address"
                     android:textAppearance="@android:style/TextAppearance.Material" />
             </LinearLayout>
