@@ -20,16 +20,6 @@ public class UserLocationFinderHelper {
             boolean explicitUpdate
     ) {
 
-//        if (testLocation >= 5) {
-//            testLocation =0;
-//        } else {
-//            testLocation++;
-//        }
-//        ctx.setCurrentLocation(
-//                ctx.cd.getBuildingData().get(testLocation).getBuildingActualCoordinates());
-//        ctx.setCurrentLocation(new Coordinates(37.3354338, -121.8850354));
-//        return;
-
         LocationManager locationManager = (LocationManager) appActivity.getSystemService(
                 Context.LOCATION_SERVICE);
         boolean isGpsOn = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -74,6 +64,16 @@ public class UserLocationFinderHelper {
                         "Cannot get Location! Check Network or GPS."
                 );
             }
+
+            if (testLocation >= 5) {
+                testLocation =0;
+            } else {
+                testLocation++;
+            }
+//        ctx.setCurrentLocation(
+//                ctx.cd.getBuildingData().get(testLocation).getBuildingActualCoordinates());
+//        ctx.setCurrentLocation(new Coordinates(37.334815, -121.878942));
+
         } catch (Exception e) {
             System.out.println("Exception while getting user location: " + e.getMessage());
             GenericToastManager.showGenericMsg(
