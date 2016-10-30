@@ -4,10 +4,8 @@ import android.content.Context;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import com.anshumantripathi.campusmapapp.R;
-import com.anshumantripathi.campusmapapp.activities.MainActivity;
-import com.anshumantripathi.campusmapapp.model.Pin;
 import com.anshumantripathi.campusmapapp.model.RedDot;
+import com.anshumantripathi.campusmapapp.model.UserDotsClear;
 
 public class UserLocationDrawUtils {
     public static void drawUserAtPixel(Context context, FrameLayout fLayout, int xP, int yP) {
@@ -15,5 +13,12 @@ public class UserLocationDrawUtils {
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         fLayout.addView(locationDot, params);
+    }
+
+    public static void clearUserDots(Context context, FrameLayout frameLayout) {
+        UserDotsClear clear = new UserDotsClear(context);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        frameLayout.addView(clear,params);
     }
 }

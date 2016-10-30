@@ -27,7 +27,7 @@ public class ScreenContext extends Activity{
     private int screenWidth;
     private int screenHeight;
 
-    private static ArrayList<Bitmap> userDots = new ArrayList<>();
+    public static ArrayList<Bitmap> userDots = new ArrayList<>();
 
     public static ArrayList<Bitmap> getPins() {
         return pins;

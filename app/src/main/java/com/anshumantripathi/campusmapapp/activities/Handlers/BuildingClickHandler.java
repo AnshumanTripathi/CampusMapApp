@@ -74,7 +74,7 @@ public class BuildingClickHandler implements View.OnTouchListener {
         if (closeMatch(Color.WHITE, color, Constants.TOLERANCE)) {
             GenericToastManager.showGenericMsg(
                     this.appActivity.getBaseContext(),
-                    "Empty Destination."
+                    "Building Detail unavailable."
             );
         } else if (closeMatch(Color.YELLOW, color, Constants.TOLERANCE)) {
             GenericToastManager.showGenericMsg(

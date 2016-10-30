@@ -31,9 +31,13 @@ public class UserLocationClickHandler implements View.OnClickListener {
     public void displayCurrentUserLocation(
             boolean showErrorIfOutOfBoundary
     ) {
+        UserLocationDrawUtils.clearUserDots(appActivity,
+                (FrameLayout) appActivity.findViewById(R.id.frameLayout));
         UserLocationFinderHelper.updateCurrentLocation(appActivity, ctx, showErrorIfOutOfBoundary);
 
         if (ctx.getCurrentLocation() != null) {
+            System.out.println("user location is: " + ctx.getCurrentLocation().getLat() + " , " +
+                ctx.getCurrentLocation().getLng());
             Coordinates mapPixels = ctx.cd.convUtils.coorToPixels(ctx.getCurrentLocation());
             if (mapPixels.getLng() > (Constants.xPixelOffset + Constants.ImageSizeW) ||
                     mapPixels.getLat() > (Constants.yPixelOffset + Constants.ImageSizeH)) {
