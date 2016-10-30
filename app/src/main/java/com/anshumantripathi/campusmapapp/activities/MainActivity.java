@@ -48,37 +48,6 @@ public class MainActivity extends AppCompatActivity {
         fab = (FloatingActionButton) findViewById(R.id.location_fab);
         final ImageView campusImage = (ImageView) findViewById(R.id.campusImage);
 
-        // ******************** Test code **************************
-
-        double lat = 37.335142;
-        double lng = -121.881276;
-        lat = lat * Math.PI / 180;
-        lng = lng * Math.PI / 180;
-
-        DisplayMetrics metrics = getResources().getDisplayMetrics();
-
-        long screenWidth = metrics.widthPixels;
-        long screenHeight = metrics.heightPixels;
-
-//        long screenHeight = 850;//campusImage.getMaxHeight();
-//        long screenWidth = 740; //campusImage.getMaxWidth();
-
-        Log.v("Width: ", String.valueOf(screenWidth));
-        Log.v("Height: ", String.valueOf(screenHeight));
-
-//        int y =  (int) Math.round(((-1 * lat) + 90) * (screenHeight / 180));
-//        int x =  (int) Math.round((lng + 180) * (screenWidth / 360));
-
-//        Log.v("x",String.valueOf(x));
-//        Log.v("y",String.valueOf(y));
-
-//        Coordinates testC = new Coordinates(37.334782, -121.881281);
-//        Coordinates xP = cd.convUtils.coorToPixels(testC);
-
-//        ctx.setxPixel((int)xP.getLng() + 65);
-//        ctx.setyPixel((int) xP.getLat() + 550);
-
-
         searchBar.setOnQueryTextListener(new SearchButtonClickHandler(this, ctx));
 
         campusImage.setOnTouchListener(new BuildingClickHandler(this, currAppContext));

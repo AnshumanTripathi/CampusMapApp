@@ -12,6 +12,8 @@ import com.anshumantripathi.campusmapapp.util.LocationContext;
 import com.anshumantripathi.campusmapapp.util.UserLocationDrawUtils;
 import com.anshumantripathi.campusmapapp.util.UserLocationFinderHelper;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.logging.Logger;
 
 public class UserLocationClickHandler implements View.OnClickListener {
@@ -32,13 +34,14 @@ public class UserLocationClickHandler implements View.OnClickListener {
     }
 
     public void displayCurrentUserLocation(boolean showErrorIfOutOfBoundary) {
+
         UserLocationDrawUtils.clearUserDots(appActivity,
                 (FrameLayout) appActivity.findViewById(R.id.frameLayout));
         UserLocationFinderHelper.updateCurrentLocation(appActivity, ctx, showErrorIfOutOfBoundary);
+
         logger.info("Current Location from ctx: "+ctx.getCurrentLocation().toString());
         if (ctx.getCurrentLocation() != null) {
-            System.out.println("user location is: " + ctx.getCurrentLocation().getLat() + " , " +
-                ctx.getCurrentLocation().getLng());
+
             Coordinates mapPixels = ctx.cd.convUtils.coorToPixels(ctx.getCurrentLocation());
             if (mapPixels.getLng() > (Constants.xPixelOffset + Constants.ImageSizeW) ||
                     mapPixels.getLat() > (Constants.yPixelOffset + Constants.ImageSizeH)) {
