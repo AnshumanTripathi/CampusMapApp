@@ -27,7 +27,7 @@ public class UserLocationFinderHelper {
 //        }
 //        ctx.setCurrentLocation(
 //                ctx.cd.getBuildingData().get(testLocation).getBuildingActualCoordinates());
-//        ctx.setCurrentLocation(new Coordinates(37.3354338, -121.8850354));
+//        ctx.setCurrentLocation(new Coordinates(37.336586, -121.883212));
 //        return;
 
         LocationManager locationManager = (LocationManager) appActivity.getSystemService(
