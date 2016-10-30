@@ -21,12 +21,11 @@ public class ClearCanvas extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        log.info("On Draw Called");
-        ArrayList<Bitmap> pins = ScreenContext.getPins();
+        ArrayList<Bitmap> pins = ScreenContext.pinsToClear;
         for(Bitmap pin : pins){
             pin.eraseColor(Color.TRANSPARENT);
         }
-        ScreenContext.clearPins();
+        ScreenContext.pinsToClear.clear();
         super.onDraw(canvas);
     }
 }

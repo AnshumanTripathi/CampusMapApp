@@ -23,10 +23,12 @@ public class SearchButtonClickHandler implements android.widget.SearchView.OnQue
         this.ctx = ctx;
     }
 
-
     @Override
     public boolean onQueryTextSubmit(String query) {
+        System.out.println("text submit: " + query);
        hideSoftKeypad();
+        //clear old pins
+        ((MainActivity) activity).onSearchClear();
         searchBuilding(query);
         ((MainActivity) activity).onBuildingDetailsFetch();
         return false;
@@ -34,11 +36,13 @@ public class SearchButtonClickHandler implements android.widget.SearchView.OnQue
 
     @Override
     public boolean onQueryTextChange(String newText) {
+        System.out.println("text change: " + newText);
         if(newText.equals("")) {
             ((MainActivity) activity).onSearchClear();
         }
         return false;
     }
+
     //search for the buildings as per the search query passed.
     public void searchBuilding(String searchQuery) {
         ArrayList<BuildingData> op = new ArrayList<>();

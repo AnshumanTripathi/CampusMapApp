@@ -15,6 +15,8 @@ public class LocationContext extends Activity {
     private static LocationContext instance;
     public CampusData cd = new CampusData();
 
+    public boolean isFreshSearch = false;
+
     public static void setInstance(LocationContext instance) {
         LocationContext.instance = instance;
     }
