@@ -22,24 +22,13 @@ public class ScreenContext extends Activity{
     private static ScreenContext instance;
     private int xPixel;
     private int yPixel;
-    private static ArrayList<Bitmap> pins = new ArrayList<Bitmap>();
+    public static ArrayList<Bitmap> pins = new ArrayList<Bitmap>();
+    public static ArrayList<Bitmap> pinsToClear = new ArrayList<Bitmap>();
     private float pixelPerLocation;
     private int screenWidth;
     private int screenHeight;
 
     public static ArrayList<Bitmap> userDots = new ArrayList<>();
-
-    public static ArrayList<Bitmap> getPins() {
-        return pins;
-    }
-
-    public static void setPins(Bitmap pin) {
-        pins.add(pin);
-    }
-
-    public static void clearPins(){
-        pins.clear();
-    }
 
     public static void addUserDot(Bitmap dot) {
         userDots.add(dot);

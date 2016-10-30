@@ -22,10 +22,14 @@ import android.widget.Toast;
 
 import com.anshumantripathi.campusmapapp.R;
 import com.anshumantripathi.campusmapapp.activities.Handlers.BuildingClickHandler;
+import com.anshumantripathi.campusmapapp.activities.Handlers.GenericToastManager;
 import com.anshumantripathi.campusmapapp.activities.Handlers.SearchButtonClickHandler;
 import com.anshumantripathi.campusmapapp.activities.Handlers.UserLocationClickHandler;
 import com.anshumantripathi.campusmapapp.util.LocationContext;
 import com.anshumantripathi.campusmapapp.util.PinDrawUtils;
+import com.anshumantripathi.campusmapapp.util.ScreenContext;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -90,12 +94,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onBuildingDetailsFetch() {
-
-       System.out.println("Add pin method called");
-        PinDrawUtils.drawPinAtPixel(this,(FrameLayout) findViewById(R.id.frameLayout));
+        if (ctx.getSearchResult() == null || ctx.getSearchResult().size() == 0) {
+            GenericToastManager.showGenericMsg(this, "No results found");
+        } else {
+            PinDrawUtils.drawPinAtPixel(this, (FrameLayout) findViewById(R.id.frameLayout));
+        }
     }
 
     public void onSearchClear() {
+        // shift pins from one array to clear pins array
+        ScreenContext.pinsToClear = ScreenContext.pins;
+        ScreenContext.pins = new ArrayList<>();
         PinDrawUtils.clearPinAtPixel(this, (FrameLayout) findViewById(R.id.frameLayout));
     }
 
@@ -110,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
                     ACCESS_COARSE_LOCATION
             );
         }
-
     }
 
     @Override

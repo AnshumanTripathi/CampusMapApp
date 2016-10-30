@@ -48,11 +48,10 @@ public class Pin extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        log.info("onDraw Called!"+"xP: "+xP+"yP: "+yP);
         for(Map.Entry<Integer,Integer> map : pixels.entrySet()) {
             canvas.drawBitmap(pin, map.getKey(), map.getValue(), null);
         }
-        ScreenContext.setPins(pin);
+        ScreenContext.pins.add(pin);
         canvas.save();
         super.onDraw(canvas);
     }
