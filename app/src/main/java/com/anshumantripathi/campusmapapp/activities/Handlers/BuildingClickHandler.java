@@ -72,7 +72,6 @@ public class BuildingClickHandler implements View.OnTouchListener {
         Log.v("Color clicked:", Integer.toString(color));
 
         if (closeMatch(Color.WHITE, color, Constants.TOLERANCE)) {
-            
         } else if (closeMatch(Color.YELLOW, color, Constants.TOLERANCE)) {
             GenericToastManager.showGenericMsg(
                     this.appActivity.getBaseContext(),
