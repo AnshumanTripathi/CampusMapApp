@@ -37,7 +37,6 @@ public class SearchButtonClickHandler implements android.widget.SearchView.OnQue
         if(newText.equals("")) {
             ((MainActivity) activity).onSearchClear();
         }
-        hideSoftKeypad();
         return false;
     }
     //search for the buildings as per the search query passed.

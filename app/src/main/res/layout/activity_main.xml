@@ -38,7 +38,10 @@
                     android:ems="10"
                     android:layout_centerHorizontal="true"
                     android:inputType="textPersonName"
-                    android:background="@drawable/rounded_edittext"/>
+                    android:background="@drawable/rounded_edittext"
+                    android:queryHint="touch here"
+                    app:queryHint="Building Name or Abbr."
+                    android:orientation="horizontal" />
 
             </RelativeLayout>
         </LinearLayout>
