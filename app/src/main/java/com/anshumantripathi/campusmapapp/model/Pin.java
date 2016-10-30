@@ -46,7 +46,6 @@ public class Pin extends View {
         mPaint = new Paint();
     }
 
-
     @Override
     protected void onDraw(Canvas canvas) {
         log.info("onDraw Called!"+"xP: "+xP+"yP: "+yP);

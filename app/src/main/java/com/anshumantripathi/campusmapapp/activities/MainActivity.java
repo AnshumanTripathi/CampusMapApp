@@ -6,8 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Criteria;
-import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -17,8 +15,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.SearchView;
@@ -26,18 +22,10 @@ import android.widget.Toast;
 
 import com.anshumantripathi.campusmapapp.R;
 import com.anshumantripathi.campusmapapp.activities.Handlers.BuildingClickHandler;
-import com.anshumantripathi.campusmapapp.activities.Handlers.GenericToastManager;
 import com.anshumantripathi.campusmapapp.activities.Handlers.SearchButtonClickHandler;
-import com.anshumantripathi.campusmapapp.activities.Handlers.UserLocationChangeHandler;
-import com.anshumantripathi.campusmapapp.model.BuildingData;
-import com.anshumantripathi.campusmapapp.model.CampusData;
-import com.anshumantripathi.campusmapapp.model.Constants;
-import com.anshumantripathi.campusmapapp.model.Coordinates;
-import com.anshumantripathi.campusmapapp.model.RedDot;
+import com.anshumantripathi.campusmapapp.activities.Handlers.UserLocationClickHandler;
 import com.anshumantripathi.campusmapapp.util.LocationContext;
 import com.anshumantripathi.campusmapapp.util.PinDrawUtils;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
     LocationContext ctx = LocationContext.getInstance();
     SearchView searchBar;
     FloatingActionButton fab;
-    CampusData cd = new CampusData();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,18 +43,10 @@ public class MainActivity extends AppCompatActivity {
         LocationContext currAppContext = LocationContext.getInstance();
         currAppContext.resetContext();
 
-        // 1. campus details
-        cd.initCampusBoundaries();
-
-        // 2. current user details
-        getCurrentLocation();
-
         // ************ initialize the UI elements on screen ********************
         searchBar = (SearchView) findViewById(R.id.searchbar);
         fab = (FloatingActionButton) findViewById(R.id.location_fab);
         final ImageView campusImage = (ImageView) findViewById(R.id.campusImage);
-
-
 
         // ******************** Test code **************************
 
@@ -93,31 +72,21 @@ public class MainActivity extends AppCompatActivity {
 //        Log.v("x",String.valueOf(x));
 //        Log.v("y",String.valueOf(y));
 
-        Coordinates testC = new Coordinates(37.334537, -121.884430);
-//        double xP = 65 + cd.convUtils.getCurrentPixelX(testC);
-//        double yP = 550 + cd.convUtils.getCurrentPixelY(testC);
-        Coordinates xP = cd.convUtils.coorToPixels(testC);
+//        Coordinates testC = new Coordinates(37.334782, -121.881281);
+//        Coordinates xP = cd.convUtils.coorToPixels(testC);
 
-        ctx.setxPixel((int)xP.getLng() + 65);
-        ctx.setyPixel((int) xP.getLat() + 550);
-        RedDot locatoinDot = new RedDot(MainActivity.this);
-        FrameLayout fLayout = (FrameLayout) findViewById(R.id.frameLayout);
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
-        fLayout.addView(locatoinDot, params);
+//        ctx.setxPixel((int)xP.getLng() + 65);
+//        ctx.setyPixel((int) xP.getLat() + 550);
 
 
-        searchBar.setOnQueryTextListener(new SearchButtonClickHandler(this, cd, ctx));
+        searchBar.setOnQueryTextListener(new SearchButtonClickHandler(this, ctx));
 
         campusImage.setOnTouchListener(new BuildingClickHandler(this, currAppContext));
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        UserLocationClickHandler uhc = new UserLocationClickHandler(this, ctx);
+        fab.setOnClickListener(uhc);
 
-            }
-        });
-
+        // show user initial location
+        uhc.displayCurrentUserLocation(false);
     }
 
     public void onBuildingDetailsFetch() {
@@ -130,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         PinDrawUtils.clearPinAtPixel(this, (FrameLayout) findViewById(R.id.frameLayout));
     }
 
-    public void checkPermission() {
+    public void checkGPSPermission() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
                 PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
@@ -142,73 +111,6 @@ public class MainActivity extends AppCompatActivity {
             );
         }
 
-    }
-
-    public void getCurrentLocation() {
-        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        boolean isGpsOn = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        boolean isNetworkOn = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-//        boolean isProvider = locationManager.isProviderEnabled(LocationManager.PASSIVE_PROVIDER);
-
-        try {
-            final Coordinates currentLocation = new Coordinates();
-            if (isGpsOn) {
-                // great. We can now show the user Dot.
-                locationManager.requestLocationUpdates(
-                        LocationManager.GPS_PROVIDER,
-                        0,
-                        0,
-                        new UserLocationChangeHandler(LocationContext.getInstance())
-                );
-
-                Location userLastLocation = locationManager.getLastKnownLocation(
-                        LocationManager.GPS_PROVIDER);
-
-                if (userLastLocation != null) {
-                    currentLocation.setLat(userLastLocation.getLatitude());
-                    currentLocation.setLng(userLastLocation.getLongitude());
-                    ctx.setCurrentLocation(currentLocation);
-                    GenericToastManager.showGenericMsg(
-                            getBaseContext(),
-                            currentLocation.toString()
-                    );
-                } else {
-                    GenericToastManager.showGenericMsg(
-                            getBaseContext(),
-                            "Failed to get user location."
-                    );
-                }
-            } else if (isNetworkOn) {
-                String bestProvider = locationManager.getBestProvider(new Criteria(), false);
-                Location location = locationManager.getLastKnownLocation(bestProvider);
-                if (location != null) {
-                    currentLocation.setLat(location.getLatitude());
-                    currentLocation.setLng(location.getLongitude());
-                    ctx.setCurrentLocation(currentLocation);
-                    GenericToastManager.showGenericMsg(
-                            getBaseContext(),
-                            currentLocation.toString()
-                    );
-                } else {
-                    GenericToastManager.showGenericMsg(
-                            getBaseContext(),
-                            "Failed to get user location."
-                    );
-                }
-            } else {
-                GenericToastManager.showGenericMsg(
-                        getBaseContext(),
-                        "Cannot get Location! Check Network or GPS."
-                );
-            }
-        } catch (Exception e) {
-            System.out.println("Exception while getting user location: " + e.getMessage());
-            GenericToastManager.showGenericMsg(
-                    getBaseContext(),
-                    "Location permission might be missing. Check GPS."
-            );
-            checkPermission();
-        }
     }
 
     @Override
@@ -226,8 +128,14 @@ public class MainActivity extends AppCompatActivity {
                                 .setCancelable(false)
                                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                     @Override
-                                    public void onClick(@SuppressWarnings("unused") DialogInterface dialog, @SuppressWarnings("unused") int which) {
-                                        startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                                    public void onClick(@SuppressWarnings("unused")
+                                                                DialogInterface dialog,
+                                                        @SuppressWarnings("unused") int which) {
+                                        startActivity(
+                                                new Intent(
+                                                        Settings.ACTION_LOCATION_SOURCE_SETTINGS
+                                                )
+                                        );
                                     }
                                 })
                                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -251,31 +159,5 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
         }
-    }
-
-
-//    public EditText getSearchbar(){
-//        return this.searchBar;
-//    }
-
-    public void searchBuilding(String searchQuery) {
-        ArrayList<BuildingData> op = new ArrayList<>();
-        for (int id = 0; id < Constants.BUILD_COUNT; id++) {
-            //get the building data object
-            BuildingData bd = cd.getBuildingData().get(id);
-            if (bd != null) {
-
-                //obtain the name and abbr
-                String buildingName = bd.getName().toLowerCase();
-                String buildingAbbr = cd.getBuildingData().get(id).getAbbr().toLowerCase();
-
-                //if the search qquery matches some text in the name or is equal to abbr
-                if ((buildingName.contains(searchQuery))
-                        || (buildingAbbr.equals(searchQuery))) {
-                    op.add(bd);
-                }
-            }
-        }
-        ctx.setSearchResult(op);
     }
 }

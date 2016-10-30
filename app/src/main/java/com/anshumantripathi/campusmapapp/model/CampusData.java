@@ -11,7 +11,6 @@ public class CampusData {
     private Coordinates point3;
     private Coordinates point4;
     private ArrayList<BuildingData> buildingData;
-    public ArrayList<String> buildingName;
 
     public ConversionUtils convUtils = null;
 
@@ -21,6 +20,7 @@ public class CampusData {
 
     public CampusData() {
         populateBuildingDetails();
+        initCampusBoundaries();
     }
 
     private void populateBuildingDetails() {
@@ -29,8 +29,8 @@ public class CampusData {
         BuildingData bd_1 = new BuildingData();
         bd_1.setName("King Library");
         bd_1.setAddress("Dr. Martin Luther King, Jr. Library, 150 East San Fernando Street, San Jose, CA 95112");
-        bd_1.setLat(37.335507);
-        bd_1.setLng(-121.884999);
+        bd_1.setLat(37.3354338);
+        bd_1.setLng(-121.8850354);
         bd_1.setBimage(R.drawable.library);
         bd_1.setStreetViewCoord(new Coordinates(37.335785,-121.885790));
         bd_1.setxPixel(195);
@@ -42,8 +42,8 @@ public class CampusData {
         bd_2 = new BuildingData();
         bd_2.setName("Engineering Building");
         bd_2.setAddress("San José State University Charles W. Davidson College of Engineering, 1 Washington Square, San Jose, CA 95112");
-        bd_2.setLat(37.335142);
-        bd_2.setLng(-121.881276);
+        bd_2.setLat(37.337383);
+        bd_2.setLng(-121.881692);
         bd_2.setBimage(R.drawable.eng_building);
         bd_2.setStreetViewCoord(new Coordinates(37.337404,-121.882614));
         bd_2.setxPixel(826);
@@ -55,8 +55,8 @@ public class CampusData {
         bd_3 = new BuildingData();
         bd_3.setName("Yoshihiro Uchida Hall");
         bd_3.setAddress("Yoshihiro Uchida Hall, San Jose, CA 95112");
-        bd_3.setLat(37.333770);
-        bd_3.setLng(-121.883388);
+        bd_3.setLat(37.333695);
+        bd_3.setLng(-121.883834);
         bd_3.setStreetViewCoord(new Coordinates(37.333362,-121.884132));
         bd_3.setBimage(R.drawable.ychall);
         bd_3.setAbbr("yuh");
@@ -67,8 +67,8 @@ public class CampusData {
         BuildingData bd_4 = new BuildingData();
         bd_4.setName("Student Union");
         bd_4.setAddress("Student Union Building, San Jose, CA 95112");
-        bd_4.setLat(37.336450);
-        bd_4.setLng(-121.881265);
+        bd_4.setLat(37.336292);
+        bd_4.setLng(-121.881363);
         bd_4.setStreetViewCoord(new Coordinates(37.337247,-121.882780));
         bd_4.setBimage(R.drawable.studentunion);
         bd_4.setxPixel(868);
@@ -80,8 +80,8 @@ public class CampusData {
         BuildingData bd_5 = new BuildingData();
         bd_5.setName("Boccardo Business Complex");
         bd_5.setAddress("Boccardo Business Complex, San Jose, CA 95112");
-        bd_5.setLat(37.336561);
-        bd_5.setLng(-121.878723);
+        bd_5.setLat(37.336673);
+        bd_5.setLng(-121.878591);
         bd_5.setStreetViewCoord(new Coordinates(37.336855,-121.878296));
         bd_5.setBimage(R.drawable.bbc);
         bd_5.setAbbr("bbc");
@@ -92,8 +92,8 @@ public class CampusData {
         BuildingData bd_6 = new BuildingData();
         bd_6.setName("South Parking Garage");
         bd_6.setAddress("San Jose State University South Garage, 330 South 7th Street, San Jose, CA 95112");
-        bd_6.setLat(37.333474);
-        bd_6.setLng(-121.879916);
+        bd_6.setLat(37.333044);
+        bd_6.setLng(-121.880983);
         bd_6.setStreetViewCoord(new Coordinates(37.332687,-121.880516));
         bd_6.setBimage(R.drawable.garage);
         bd_6.setAbbr("spg");

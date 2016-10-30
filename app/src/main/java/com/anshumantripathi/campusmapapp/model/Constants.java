@@ -6,7 +6,9 @@ package com.anshumantripathi.campusmapapp.model;
 
 public class Constants {
     public static final int TOLERANCE = 60;
-    public static final int STREETV_X = 200;
-    public static final int STREETV_Y = 200;
     public static final int BUILD_COUNT = 6;
+    public static final int xPixelOffset = 65;
+    public static final int yPixelOffset = 550;
+    public static int ImageSizeW = 1300;
+    public static int ImageSizeH = 1500;
 }

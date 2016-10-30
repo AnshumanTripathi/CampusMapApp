@@ -6,7 +6,6 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.anshumantripathi.campusmapapp.activities.MainActivity;
 import com.anshumantripathi.campusmapapp.model.BuildingData;
-import com.anshumantripathi.campusmapapp.model.CampusData;
 import com.anshumantripathi.campusmapapp.model.Constants;
 import com.anshumantripathi.campusmapapp.util.LocationContext;
 
@@ -14,16 +13,13 @@ import java.util.ArrayList;
 
 public class SearchButtonClickHandler implements android.widget.SearchView.OnQueryTextListener{
     private AppCompatActivity activity;
-    private CampusData cd;
     private LocationContext ctx;
 
     public SearchButtonClickHandler(
             AppCompatActivity activity,
-            CampusData cd,
             LocationContext ctx
     ) {
         this.activity = activity;
-        this.cd = cd;
         this.ctx = ctx;
     }
 
@@ -49,12 +45,12 @@ public class SearchButtonClickHandler implements android.widget.SearchView.OnQue
         ArrayList<BuildingData> op = new ArrayList<>();
         for (int id = 0; id < Constants.BUILD_COUNT; id++) {
             //get the building data object
-            BuildingData bd = cd.getBuildingData().get(id);
+            BuildingData bd = ctx.cd.getBuildingData().get(id);
             if (bd != null) {
 
                 //obtain the name and abbr
                 String buildingName = bd.getName().toLowerCase();
-                String buildingAbbr = cd.getBuildingData().get(id).getAbbr().toLowerCase();
+                String buildingAbbr = ctx.cd.getBuildingData().get(id).getAbbr().toLowerCase();
 
                 //if the search qquery matches some text in the name or is equal to abbr
                 if ((buildingName.contains(searchQuery))

@@ -27,6 +27,8 @@ public class ScreenContext extends Activity{
     private int screenWidth;
     private int screenHeight;
 
+    private static ArrayList<Bitmap> userDots = new ArrayList<>();
+
     public static ArrayList<Bitmap> getPins() {
         return pins;
     }
@@ -37,6 +39,14 @@ public class ScreenContext extends Activity{
 
     public static void clearPins(){
         pins.clear();
+    }
+
+    public static void addUserDot(Bitmap dot) {
+        userDots.add(dot);
+    }
+
+    public static void clearUserDots() {
+        userDots.clear();
     }
 
     public static ScreenContext getInstance(){
