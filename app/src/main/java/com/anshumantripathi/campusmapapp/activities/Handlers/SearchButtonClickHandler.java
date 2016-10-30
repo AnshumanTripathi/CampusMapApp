@@ -29,7 +29,7 @@ public class SearchButtonClickHandler implements android.widget.SearchView.OnQue
        hideSoftKeypad();
         //clear old pins
         ((MainActivity) activity).onSearchClear();
-        searchBuilding(query);
+        searchBuilding(query.toLowerCase());
         ((MainActivity) activity).onBuildingDetailsFetch();
         return false;
     }
