@@ -3,8 +3,6 @@ package com.anshumantripathi.campusmapapp.activities.Handlers;
 import android.content.Context;
 import android.widget.Toast;
 
-import com.anshumantripathi.campusmapapp.activities.MainActivity;
-
 public class GenericToastManager {
     public static void showLocationUnavailableError(Context ctx) {
         Toast.makeText(ctx, "User Location unavailable.", Toast.LENGTH_SHORT).show();

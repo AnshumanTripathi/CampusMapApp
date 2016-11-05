@@ -68,6 +68,6 @@ public class StreetViewTask extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        LocationContext.getInstance().setStreetViewImg(img);
+        LocationContext.setStreetViewImg(img);
     }
 }

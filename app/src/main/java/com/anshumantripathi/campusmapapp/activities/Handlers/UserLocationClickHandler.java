@@ -1,7 +1,6 @@
 package com.anshumantripathi.campusmapapp.activities.Handlers;
 
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -12,8 +11,6 @@ import com.anshumantripathi.campusmapapp.util.LocationContext;
 import com.anshumantripathi.campusmapapp.util.UserLocationDrawUtils;
 import com.anshumantripathi.campusmapapp.util.UserLocationFinderHelper;
 
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.logging.Logger;
 
 public class UserLocationClickHandler implements View.OnClickListener {
@@ -39,7 +36,6 @@ public class UserLocationClickHandler implements View.OnClickListener {
                 (FrameLayout) appActivity.findViewById(R.id.frameLayout));
         UserLocationFinderHelper.updateCurrentLocation(appActivity, ctx, showErrorIfOutOfBoundary);
 
-        logger.info("Current Location from ctx: "+ctx.getCurrentLocation().toString());
         if (ctx.getCurrentLocation() != null) {
 
             Coordinates mapPixels = ctx.cd.convUtils.coorToPixels(ctx.getCurrentLocation());

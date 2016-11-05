@@ -4,13 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.DisplayMetrics;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
-import com.anshumantripathi.campusmapapp.R;
-import com.anshumantripathi.campusmapapp.activities.MainActivity;
 import com.anshumantripathi.campusmapapp.model.CampusData;
-import com.anshumantripathi.campusmapapp.model.Pin;
 
 import java.util.ArrayList;
 

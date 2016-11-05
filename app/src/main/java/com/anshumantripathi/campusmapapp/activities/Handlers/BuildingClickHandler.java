@@ -7,10 +7,8 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.anshumantripathi.campusmapapp.R;
-import com.anshumantripathi.campusmapapp.activities.MainActivity;
 import com.anshumantripathi.campusmapapp.model.BuildingData;
 import com.anshumantripathi.campusmapapp.model.CampusData;
 import com.anshumantripathi.campusmapapp.model.Constants;
@@ -19,8 +17,6 @@ import com.anshumantripathi.campusmapapp.model.TravelMode;
 import com.anshumantripathi.campusmapapp.tasks.DistanceMatrixTask;
 import com.anshumantripathi.campusmapapp.util.LocationContext;
 import com.anshumantripathi.campusmapapp.util.MapUtils;
-
-import java.util.concurrent.ExecutionException;
 
 
 public class BuildingClickHandler implements View.OnTouchListener {
