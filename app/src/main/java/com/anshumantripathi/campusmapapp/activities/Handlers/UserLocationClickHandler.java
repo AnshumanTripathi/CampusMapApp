@@ -11,12 +11,9 @@ import com.anshumantripathi.campusmapapp.util.LocationContext;
 import com.anshumantripathi.campusmapapp.util.UserLocationDrawUtils;
 import com.anshumantripathi.campusmapapp.util.UserLocationFinderHelper;
 
-import java.util.logging.Logger;
-
 public class UserLocationClickHandler implements View.OnClickListener {
     private AppCompatActivity appActivity;
     private LocationContext ctx;
-    private Logger logger = Logger.getLogger(UserLocationClickHandler.class.getName());
     public UserLocationClickHandler (
             AppCompatActivity activity,
             LocationContext ctx

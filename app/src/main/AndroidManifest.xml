@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyB1vq6iiEYhR21hRbshj-lhf7KfnH0j-fU"/>
+            android:value=""/>
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

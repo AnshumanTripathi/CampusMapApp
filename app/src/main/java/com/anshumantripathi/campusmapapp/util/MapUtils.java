@@ -21,7 +21,7 @@ public class MapUtils {
                     "," +
                     Double.toString(des_long) +
                     "&mode=" +
-                    mode+"&key=AIzaSyApM-AMilsP1qFdE8McvTkzh6y8TxdqmkY";
+                    mode+"&key=API_KEY";
             return stringURL;
         } catch (Exception ex) {
             ex.printStackTrace();
